@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div className="flex items-center justify-center">
+    <div className="w-screen h-screen flex items-center justify-center">
       <h1>Sample</h1>
     </div>
   );
