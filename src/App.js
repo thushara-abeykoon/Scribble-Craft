@@ -1,9 +1,7 @@
+import { Login, Register } from "./components/LoginRegister";
+
 function App() {
-  return (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <h1>Sample</h1>
-    </div>
-  );
+  return <div className="w-screen h-screen flex justify-center"></div>;
 }
 
 export default App;

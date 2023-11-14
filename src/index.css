@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Ludida_Handwriting';
+  src: url('../src/fonts/LucidaHandwritingStdRg.TTF');
+}
 
 body {
   margin: 0;
@@ -9,9 +13,68 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #cfcfcf;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.box{
+  background-color: rgb(236, 236, 236);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 8px 2px rgb(163, 163, 163);
+  border-radius: 40px;
+  width: 400px;
+  height: 350px;
+}
+
+.box form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxHeader{
+  font-weight: 600;
+  color: #727272;
+  font-size: x-large;
+}
+
+.inputField{
+  width: 250px;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 2px solid #adadad;
+  padding: 8px 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+  color: #727272;
+}
+
+.inputField::placeholder{
+  color: #adadad;
+  font-size: small;
+}
+
+.button{
+  cursor: pointer;
+  margin-top: 20px;
+  width: 150px;
+  background-color: #4f6192;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0px 2px 5px 2px rgb(156, 156, 156);
+  transition: background-color 0.3s;
+}
+.button:hover{
+  background-color: #354061;
 }
