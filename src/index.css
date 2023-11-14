@@ -88,3 +88,13 @@ code {
   background-color: #354061;
 }
 
+.navBarItem{
+  color: #616161;
+}
+
+.navBarItem:hover{
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6  px;
+  text-decoration-color: #919191;
+}
