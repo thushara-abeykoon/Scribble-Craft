@@ -21,6 +21,15 @@ code {
     monospace;
 }
 
+.headerDiv{
+  color: #616161 ;
+}
+
+.header{
+  font-family: 'Ludida_Handwriting';
+  font-size: xx-large;
+}
+
 .box{
   background-color: rgb(236, 236, 236);
   display:flex;
@@ -78,3 +87,4 @@ code {
 .button:hover{
   background-color: #354061;
 }
+
