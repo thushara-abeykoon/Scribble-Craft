@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavigationBar from './NavigationBar';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header() {
-    console.log(window.location.href);
-    const [isHome,setIsHome] = useState((window.location.href==="http://localhost:3000/")?true:false);
+    const location = useLocation();
+    const [isHome,setIsHome] = useState((location.pathname==='/')?true:false);
+    useEffect(()=>{
+        if(location.pathname=='/'){
+            setIsHome(true)
+        }
+        else{
+            setIsHome(false)
+        }
+    })
   const navigate = useNavigate();
   return (
     <div className={(!isHome)?'headerWrapper flex px-10 pt-10 items-center w-full h-20':'justify-between flex px-10 pt-10 items-center w-full h-20'} >
