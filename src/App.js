@@ -5,13 +5,18 @@ import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="w-screen h-screen flex justify-center">
+    <div className="w-screen h-screen flex flex-col items-center">
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <div
+        className="flex justify-center items-center"
+        style={{ height: "600px" }}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
     </div>
   );
 }
