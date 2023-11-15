@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export default function NavigationBar() {
   return (
     <div className="w-96 flex justify-around">
-      <Link to="mobile_app" className="navBarItem">
-        mobile app
+      <Link to="downloads" className="navBarItem">
+        downloads
       </Link>
       <Link to="about" className="navBarItem">
         about
@@ -15,6 +15,25 @@ export default function NavigationBar() {
       </Link>
       <Link to="login" className="navBarItem">
         login
+      </Link>
+    </div>
+  );
+}
+
+export function NavBarUser() {
+  return (
+    <div>
+      <Link to="dashboard" className="navBarItem">
+        dashboard
+      </Link>
+      <Link to="editor" className="navBarItem">
+        editor
+      </Link>
+      <Link to="downloads" className="navBarItem">
+        downloads
+      </Link>
+      <Link to="/" className="navBarItem">
+        logout
       </Link>
     </div>
   );
