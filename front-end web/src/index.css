@@ -111,6 +111,7 @@ code {
 
 .navBarItem{
   color: #616161;
+  margin: 0 30px;
 }
 
 .navBarItem:hover{

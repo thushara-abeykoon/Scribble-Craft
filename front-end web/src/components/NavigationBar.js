@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
   return (
-    <div className="w-96 flex justify-around">
+    <div className="w-1/2 flex justify-end">
       <Link to="downloads" className="navBarItem">
         downloads
       </Link>
@@ -22,15 +22,15 @@ export default function NavigationBar() {
 
 export function NavBarUser() {
   return (
-    <div>
+    <div className="w-1/2 flex justify-end">
       <Link to="dashboard" className="navBarItem">
         dashboard
       </Link>
-      <Link to="editor" className="navBarItem">
-        editor
-      </Link>
       <Link to="downloads" className="navBarItem">
         downloads
+      </Link>
+      <Link to="accout" className="navBarItem">
+        account
       </Link>
       <Link to="/" className="navBarItem">
         logout
