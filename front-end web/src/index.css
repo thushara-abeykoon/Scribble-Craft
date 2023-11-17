@@ -6,7 +6,27 @@
   font-family: 'Ludida_Handwriting';
   src: url('../src/fonts/LucidaHandwritingStdRg.TTF');
 }
+@font-face {
+  font-family: 'Alex_Handwriting';
+  src: url('./fonts/AlexBrush-Regular.ttf');
+}
+@font-face {
+  font-family: 'GreatVibes_Handwriting';
+  src: url('./fonts/GreatVibes-Regular.ttf');
+}
 
+@font-face {
+  font-family: 'AyulYars_Handwriting';
+  src: url('./fonts/Aulyars Italic.otf');
+}
+@font-face {
+  font-family: 'Candy_Handwriting';
+  src: url('./fonts/CANDY___.otf');
+}
+@font-face {
+  font-family: 'southam_Handwriting';
+  src: url('./fonts/Handycheera Regular.otf');
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -212,8 +232,47 @@ code {
 }
 
 .typingText{
-  font-family: 'Ludida_Handwriting';
+  font-family: 'GreatVibes_Handwriting';
   font-weight: bold;
   font-size: 50px;
   color: #2b2b2b;
+  animation: fontChanger 25s infinite;
+}
+
+
+@keyframes fontChanger {
+  0%{
+    font-family: 'Alex_Handwriting';
+  }
+  25%{
+    font-family: 'AyulYars_Handwriting';
+  }
+  50%{
+    font-family: 'Ludida_Handwriting';
+  }
+  75%{
+    font-family: 'Candy_Handwriting';
+  }
+  100%{
+    font-family: 'GreatVibes_Handwriting';
+  }
+}
+
+.alex{
+  font-family: 'Alex_Handwriting';
+}
+.lucida{
+  font-family: 'Ludida_Handwriting';
+}
+.candy{
+  font-family: 'Candy_Handwriting';
+}
+.ayul{
+  font-family: 'AyulYars_Handwriting';
+}
+.greatVibes{
+  font-family: 'GreatVibes_Handwriting';
+}
+.southam{
+  font-family: 'southam_Handwriting';
 }
