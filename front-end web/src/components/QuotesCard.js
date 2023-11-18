@@ -19,7 +19,7 @@ export function QuotesCard({ title, desc, fontClass }) {
   }, []);
   return (
     <div
-      className={`font-serif text-3xl text-stone-800 flex-col w-96 h-full bg-yellow-600 bg-opacity-20 backdrop-blur-sm rounded-3xl p-10`}
+      className={`font-serif text-3xl text-stone-800 flex-col w-96 h-full bg-orange-950 bg-opacity-20 backdrop-blur-sm rounded-3xl p-10`}
     >
       <div className="mt-5 px-1 h-64 scroll-m-12 rounded-lg text-ellipsis overflow-hidden font-serif text-md">
         <p
