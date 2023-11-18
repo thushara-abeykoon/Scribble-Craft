@@ -18,11 +18,13 @@ export default function TextBoxHome({title,desc,fontClass}) {
         };
     },[])
   return (
-    <div className={`font-serif text-3xl drop-shadow-2xl w-96 h-96 backdrop-blur-sm hover:backdrop-blur-lg rounded-3xl p-10`}>
-      <h3 className={`${fontClass} text-3xl font-bold inline`} ref={titleElement}></h3>
-        <div className='font-serif text-sm'>
-        <p className={`${fontClass} text-sm inline`} style={{fontSize:"20px"}} ref={descElement}></p>
+    <div className={`font-serif text-3xl flex-col drop-shadow-2xl w-96 h-full bg-yellow-600 bg-opacity-20 backdrop-blur-sm rounded-3xl p-10`}>
+      <h3 className={`${fontClass} text-3xl font-extrabold inline`} ref={titleElement}></h3>
+        <div className='mt-5 py-3 px-1 h-64 scroll-m-12 rounded-lg text-ellipsis overflow-hidden font-serif text-sm'>
+        <p className={`${fontClass} text-sm inline font-normal`} style={{fontSize:"25px"}} ref={descElement}></p>
         </div>
+
+
     </div>
   )
 }

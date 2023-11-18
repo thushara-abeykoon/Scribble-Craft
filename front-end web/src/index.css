@@ -202,6 +202,7 @@ code {
   cursor: pointer;
   transform: translateY(150px);
   animation: homeButtonAnimation 0.2s ease-out;
+  z-index: 50;
 }
 
 .buttonHome:hover{
@@ -276,3 +277,8 @@ code {
 .southam{
   font-family: 'southam_Handwriting';
 }
+
+.textcard::-webkit-scrollbar{
+  overflow: hidden;
+}
+
