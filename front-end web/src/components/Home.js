@@ -2,23 +2,10 @@ import React, { useEffect } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import { TbMinusVertical } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-import Typed from "typed.js";
 import { QuotesCard } from "./QuotesCard";
 
 export default function Home() {
   const navigate = useNavigate();
-  // const el = React.useRef(null);
-  // useEffect(()=>{
-  //     const typed = new Typed(el.current,{
-  //         strings: ["See your style on screen...","Type with your own handwriting.","Turn your script digital.","Click below to get started..!"],
-  //         typeSpeed:150,
-  //         backSpeed:60,
-  //         loop:true
-  //     });
-  //     return ()=>{
-  //         typed.destroy()
-  //     };
-  // },[])
   return (
     <>
       <div className="flex flex-col items-center mt-0 justify-around ">
