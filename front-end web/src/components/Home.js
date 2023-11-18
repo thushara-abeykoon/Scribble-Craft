@@ -3,7 +3,7 @@ import { FaArrowRight } from "react-icons/fa6";
 import { TbMinusVertical } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import Typed from "typed.js";
-import TextBoxHome from "./TextBoxHome";
+import { QuotesCard } from "./QuotesCard";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -23,27 +23,27 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center mt-0 justify-around ">
         <div className=" px-20 grid grid-cols-3 grid-rows-1 gap-5">
-          <TextBoxHome
-            fontClass={"alex"}
-            title={"Sample Title"}
+          <QuotesCard
+            fontClass={"akadora"}
+            title={"- Martin Fowler -"}
             desc={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis similique praesentium, mollitia earum, unde nulla eaque alias aliquid iusto modi in optio ad at possimus magni. Minima ut, quaerat temporibus inventore pariatur, repellat fuga distinctio nihil nam numquam explicabo sit quasi dolorem? Inventore voluptas dolorem maxime corrupti non magnam quisquam sunt nostrum error vitae omnis ea, tempora deserunt cupiditate pariatur tenetur quas enim natus distinctio recusandae alias! Esse, praesentium a consectetur commodi enim vitae libero cumque sunt qui in? Dicta deserunt culpa iure ipsum expedita sunt iste deleniti esse! Perferendis corporis omnis fugiat amet consectetur odit eligendi adipisci odio tempora."
+              '"When you don\'t create things, you become defined by your tastes rather than ability. your tastes only narrow and exclude people. so create...."'
             }
           />
-          {/* <TextBoxHome
+          <QuotesCard
             fontClass={"ayul"}
-            title={"Hi this is something"}
+            title={"- Vincent Van Gogh -"}
             desc={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis similique praesentium, mollitia earum, unde nulla eaque alias aliquid iusto modi in optio ad at possimus magni. Minima ut, quaerat temporibus inventore pariatur, repellat fuga distinctio nihil nam numquam explicabo sit quasi dolorem? Inventore voluptas dolorem maxime corrupti non magnam quisquam sunt nostrum error vitae omnis ea, tempora deserunt cupiditate pariatur tenetur quas enim natus distinctio recusandae alias! Esse, praesentium a consectetur commodi enim vitae libero cumque sunt qui in? Dicta deserunt culpa iure ipsum expedita sunt iste deleniti esse! Perferendis corporis omnis fugiat amet consectetur odit eligendi adipisci odio tempora."
+              '"For the great doesn\'t happen through impulse alone, and is a succession of little things that are brought together...."'
             }
           />
-          <TextBoxHome
+          <QuotesCard
             fontClass={"southam"}
-            title={"Sample Title"}
+            title={"- Steve Jobs -"}
             desc={
-              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis similique praesentium, mollitia earum, unde nulla eaque alias aliquid iusto modi in optio ad at possimus magni. Minima ut, quaerat temporibus inventore pariatur, repellat fuga distinctio nihil nam numquam explicabo sit quasi dolorem? Inventore voluptas dolorem maxime corrupti non magnam quisquam sunt nostrum error vitae omnis ea, tempora deserunt cupiditate pariatur tenetur quas enim natus distinctio recusandae alias! Esse, praesentium a consectetur commodi enim vitae libero cumque sunt qui in? Dicta deserunt culpa iure ipsum expedita sunt iste deleniti esse! Perferendis corporis omnis fugiat amet consectetur odit eligendi adipisci odio tempora."
+              '"Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn\'t really do it, they just saw something. It seemed obvious to them after a while...."'
             }
-          /> */}
+          />
         </div>
         <div className="flex justify-center items-center fixed bottom-0 z-30 w-screen h-20 transition-all">
           <buttton

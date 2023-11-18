@@ -17,15 +17,15 @@
 
 @font-face {
   font-family: 'AyulYars_Handwriting';
-  src: url('./fonts/Aulyars Italic.otf');
+  src: url('./fonts/Unicorns\ are\ Awesome\ -\ TTF.ttf');
 }
 @font-face {
-  font-family: 'Candy_Handwriting';
-  src: url('./fonts/CANDY___.otf');
+  font-family: 'akaDora_handwriting';
+  src: url('./fonts/akaDora.ttf');
 }
 @font-face {
   font-family: 'southam_Handwriting';
-  src: url('./fonts/Handycheera Regular.otf');
+  src: url('./fonts/Spring\ Snowstorm.ttf');
 }
 body {
   margin: 0;
@@ -100,6 +100,7 @@ code {
   display: block;
   color: #727272;
   transition: border-color 0.4s;
+  transition: color 0.4s;
 }
 
 .inputField::placeholder{
@@ -108,25 +109,24 @@ code {
 }
 
 .inputField:focus{
-  border-color:#4f6192 ;
+  color: rgb(194 65 12);
+  border-color:rgb(194 65 12) ;
 }
 
 .button{
   cursor: pointer;
   margin-top: 20px;
   width: 150px;
-  
-  background: linear-gradient(to right,#002e58,#000e35);
-  background-color: #000e35;
+  height: 40px;
+  background-color: rgb(194 65 12);
   padding: 5px;
   border: 1px solid transparent;
-  border-radius: 15px;
+  border-radius: 10px;
   color: white;
-  box-shadow: 0px 2px 5px 2px rgb(104, 104, 104);
   transition: background-color 0.5s;
 }
 .button:hover{
-  background: black;
+  background: rgb(15 118 110);
 }
 
 .navBarItem{
@@ -252,7 +252,7 @@ code {
     font-family: 'Ludida_Handwriting';
   }
   75%{
-    font-family: 'Candy_Handwriting';
+    font-family: 'akaDora_handwriting';
   }
   100%{
     font-family: 'GreatVibes_Handwriting';
@@ -265,8 +265,8 @@ code {
 .lucida{
   font-family: 'Ludida_Handwriting';
 }
-.candy{
-  font-family: 'Candy_Handwriting';
+.akadora{
+  font-family: 'akaDora_handwriting';
 }
 .ayul{
   font-family: 'AyulYars_Handwriting';
