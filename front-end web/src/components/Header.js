@@ -39,7 +39,7 @@ export default function Header() {
             setIsHome(true);
           }}
         >
-          type 2 write
+          Scribble Craft
         </h1>
         <p className="text-xs">text to handwriting converter</p>
       </div>
