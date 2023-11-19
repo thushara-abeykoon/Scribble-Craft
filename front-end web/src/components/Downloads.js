@@ -34,7 +34,7 @@ export default function Downloads() {
   ];
   return (
     <div className="flex flex-col items-center py-10 rounded-3xl px-10 mx-10 bg-stone-400 bg-opacity-25 backdrop-blur-sm">
-      <div className="p-16 text-stone-800 text-lg font-medium text-justify">
+      <div className="px-16 text-stone-700 text-lg font-medium text-justify">
         <p>{downloadDesc.description}</p>
       </div>
       <div className="mt-10 mb-10 h-92 grid grid-cols-3 gap-20 h-full">
