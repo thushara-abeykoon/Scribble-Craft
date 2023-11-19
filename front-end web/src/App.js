@@ -17,11 +17,11 @@ function App() {
       >
         <source src={backgroundVideo} type="video/mp4" />
       </video>
-      <div className="w-screen h-screen flex flex-col items-center">
+      <div className="w-full h-full flex flex-col items-center">
         <Header />
         <div
-          className="flex justify-center items-center"
-          style={{ height: "600px" }}
+          className="flex mt-20 justify-center items-center"
+          // style={{ height: "600px" }}
         >
           <Routes>
             <Route path="/" element={<Home />} />
