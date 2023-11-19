@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center mt-0 justify-around ">
         <div className=" px-20 grid grid-cols-3 grid-rows-1 gap-5">
-          <QuotesCard
+          {/* <QuotesCard
             fontClass={"akadora"}
             title={"- Martin Fowler -"}
             desc={
@@ -30,7 +30,7 @@ export default function Home() {
             desc={
               '"Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn\'t really do it, they just saw something. It seemed obvious to them after a while...."'
             }
-          />
+          /> */}
         </div>
         <div className="flex justify-center items-center fixed bottom-0 z-30 w-screen h-20 transition-all">
           <buttton

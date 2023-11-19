@@ -53,7 +53,7 @@ code {
 }
 
 .box{
-  animation: boxTranlate 0.5s;
+  animation: boxTranlate 0.5s ease-out;
   background-color: rgb(236, 236, 236);
   display:flex;
   flex-direction: column;
@@ -63,6 +63,10 @@ code {
   border-radius: 40px;
   width: 500px;
   height: 350px;
+}
+
+.animateBox{
+  animation: boxTranlate 0.4s ease-out;
 }
 
 @keyframes boxTranlate {
