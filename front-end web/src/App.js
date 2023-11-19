@@ -4,6 +4,7 @@ import { Login, Register } from "./components/LoginRegister";
 import Header from "./components/Header";
 import backgroundVideo from "./videos/background.mp4";
 import Downloads from "./components/Downloads";
+import About from "./components/About";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/downloads" element={<Downloads />} />
+            <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
