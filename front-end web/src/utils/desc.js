@@ -1,6 +1,6 @@
 export const downloadDesc = {
   description:
-    "Experience the charm of handwritten notes in the digital age with ScribbleCraft, your go-to Printed Text to Handwriting Generator app! Transform any typed text into beautiful, personalized handwritten notes effortlessly.",
+    "Unleash your creativity with ScribbleCraft, the Text to Handwriting Font Generator app that lets you craft your own style! Personalize every detail, from the slant to the loops, and watch as your unique font transforms typed text into beautifully handwritten masterpieces. Express yourself like never before – ScribbleCraft, where your words, your style, come to life!",
   features: [
     {
       name: "Authentic Handwriting Styles",

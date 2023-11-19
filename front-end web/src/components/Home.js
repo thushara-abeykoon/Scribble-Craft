@@ -8,7 +8,7 @@ export default function Home() {
   const navigate = useNavigate();
   return (
     <>
-      <div className="flex flex-col items-center mt-0 justify-around ">
+      <div className="flex flex-col items-center fixed bottom-0 justify-around ">
         <div className=" px-20 grid grid-cols-3 grid-rows-1 gap-5">
           {/* <QuotesCard
             fontClass={"akadora"}
@@ -32,7 +32,7 @@ export default function Home() {
             }
           /> */}
         </div>
-        <div className="flex justify-center items-center fixed bottom-0 z-30 w-screen h-20 transition-all">
+        <div className="flex justify-center items-center z-30 w-full h-24 transition-all">
           <buttton
             className="hover:bg-teal-700 transition-colors duration-500 rounded-md flex justify-around items-center w-44 px-5 cursor-pointer py-3 text-white bg-orange-700"
             onClick={() => {
