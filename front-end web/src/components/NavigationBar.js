@@ -29,7 +29,7 @@ export function NavBarUser() {
       <Link to="downloads" className="navBarItem">
         downloads
       </Link>
-      <Link to="accout" className="navBarItem">
+      <Link to="account" className="navBarItem">
         account
       </Link>
       <Link to="/" className="navBarItem">

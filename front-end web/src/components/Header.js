@@ -49,10 +49,16 @@ export default function Header() {
 }
 
 export function HeaderUser() {
+  const navigate = useNavigate();
   return (
     <div className="justify-between flex px-10 pt-10 items-center w-full h-20">
-      <div className="headerDiv flex flex-col place-items-center">
-        <h1 className="header cursor-pointer">type 2 write</h1>
+      <div
+        className="headerDiv flex flex-col place-items-center "
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <h1 className="header cursor-pointer">Scribble Craft</h1>
         <p className="text-xs">text to handwriting converter</p>
       </div>
       <NavBarUser />
