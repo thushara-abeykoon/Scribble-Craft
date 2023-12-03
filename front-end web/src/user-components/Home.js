@@ -2,6 +2,7 @@ import React from "react";
 import RobotImage from "../images/robot.jpg";
 import HumanImage from "../images/human.jpg";
 import { IoIosCloseCircle } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
 }
 
 function HomeCard({ image, title }) {
+  const navigate = useNavigate();
   return (
     <div className="shadow-stone-800 shadow-2xl w-full h-4/5 bg-teal-700 flex flex-col justify-between items-center text-stone-100 rounded-3xl">
       <div>
@@ -41,7 +43,12 @@ function HomeCard({ image, title }) {
           Create Your Font{" "}
           <span className="font-bold text-orange-200">{title}</span>
         </p>
-        <button className="shadow-2xl bg-orange-700 hover:bg-black py-4 px-8 transition-colors duration-300 rounded-xl text-xl font-normal">
+        <button
+          onClick={() => {
+            navigate("/create");
+          }}
+          className="shadow-2xl bg-orange-700 hover:bg-black py-4 px-8 transition-colors duration-300 rounded-xl text-xl font-normal"
+        >
           Get Started
         </button>
       </div>
