@@ -14,7 +14,7 @@ export default function AppUser() {
     <>
       <video
         muted
-        autoplay={"autoplay"}
+        autoPlay={"autoplay"}
         preload="auto"
         loop
         className="fixed min-h-full min-w-full -z-10"
