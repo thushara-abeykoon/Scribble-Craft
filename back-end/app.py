@@ -12,7 +12,7 @@ def hello_world():  # put application's code here
     return 'Hello World!'
 
 
-@app.route('/register', methods=['POST'])
+@app.route('user/register', methods=['POST'])
 def register():
     data = request.json
     required_fields = ['username', 'fullname', 'email', 'password']
