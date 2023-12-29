@@ -2,10 +2,12 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 
 from user import user
+from font_generator import font
 import secrets
 
 app = Flask(__name__)
 app.register_blueprint(user, url_prefix='/user')
+app.register_blueprint(font, url_prefix='/font')
 
 secret_key = secrets.token_urlsafe(32)
 
@@ -15,7 +17,7 @@ jwt = JWTManager(app)
 
 
 @app.route('/')
-def hello_world():  # put application's code here
+def hello_world():
     return 'Hello World!'
 
 
