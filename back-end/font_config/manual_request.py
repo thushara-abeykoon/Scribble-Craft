@@ -4,15 +4,12 @@ from flask import Blueprint, request, jsonify
 
 font = Blueprint('font', __name__)
 
-if not os.path.exists('uploads'):
-    os.mkdir('uploads')
+if not os.path.exists('users'):
+    os.mkdir('users')
 
 available_files = []
 
-# for ascii_num in range(48, 90):
-#     if 57 < ascii_num < 65:
-#         continue
-for ascii_num in range(49, 51):
+for ascii_num in range(65, 67):
     available_files.append(chr(ascii_num))
 
 
@@ -20,17 +17,22 @@ for ascii_num in range(49, 51):
 @jwt_required()
 def generate_font():
     current_user_email = get_jwt_identity()
-    if not os.path.exists('uploads/'+current_user_email):
-        os.mkdir('uploads/' + current_user_email)
+    user_folder = os.path.join('users', current_user_email)
+    uploads_folder = os.path.join(user_folder, 'uploads')
+    if not os.path.exists(user_folder):
+        os.mkdir(user_folder)
+
+    if not os.path.exists(uploads_folder):
+        os.mkdir(uploads_folder)
 
     if not isAllFilesAvailable(request.files):
         return jsonify({'error': 'Missing images'}), 400
 
     for available_file in available_files:
         file = request.files[available_file]
-        file.save('uploads/'+current_user_email+'/'+available_file+'.'+file.filename.split('.')[-1])
+        file.save(uploads_folder+'/'+available_file+'.'+file.filename.split('.')[-1])
 
-    return jsonify({'success': True}), 200
+    return jsonify({'upload_success': True}), 200
 
 
 def isAllFilesAvailable(files_array):
@@ -39,7 +41,7 @@ def isAllFilesAvailable(files_array):
     for available_char in available_files:
         try:
             files_array[available_char]
-        except Exception as e:
+        except:
             return False
 
     return True
