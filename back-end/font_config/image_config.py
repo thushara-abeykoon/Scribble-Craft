@@ -1,3 +1,4 @@
+import base64
 import json
 
 import cv2
@@ -15,11 +16,11 @@ def enhance_image(image):
     return threshold_image
 
 
-def request_svg(image):
+def request_svg(image_path):
     payload_for_id = {
         "apikey": api_key,
         "input": "base64",
-        "file": image,
+        "file": convert_image_to_base64_string(image_path),
         "filename": "apple-icon.png",
         "outputformat": "svg"
     }
@@ -31,3 +32,11 @@ def request_svg(image):
 def get_image(convert_id):
     url_response = requests.get(convertio_url + f"/{convert_id}/status")
     return url_response
+
+
+def convert_image_to_base64_string(filepath):
+    with open(filepath, mode='rb') as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode('utf-8')
+
+    return encoded_string
+
