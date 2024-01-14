@@ -2,7 +2,7 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 
 from user import user
-from font_config.manual_request import font
+from manual_config.request_handler import font
 import secrets
 
 app = Flask(__name__)
