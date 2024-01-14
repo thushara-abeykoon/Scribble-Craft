@@ -1,6 +1,7 @@
 import base64
 import json
 import cv2
+import rembg
 import requests
 
 convertio_url = "https://api.convertio.co/convert"
@@ -39,3 +40,6 @@ def convert_image_to_base64_string(filepath):
 
     return encoded_string
 
+
+def remove_background(image):
+    return rembg.remove(image)
