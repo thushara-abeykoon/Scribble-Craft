@@ -1,6 +1,5 @@
 import base64
 import json
-
 import cv2
 import requests
 
