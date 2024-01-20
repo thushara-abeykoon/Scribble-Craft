@@ -7,6 +7,8 @@ import cv2
 import requests
 from flask import jsonify
 
+from font_config.font_template import FontTemplate
+from font_config.glyph_manager import get_paths, glyph_creator, get_max_width
 from manual_config.image_config import request_svg, get_image, enhance_image, remove_background
 
 
@@ -114,3 +116,24 @@ class FontConfig:
     def save_svg(self, content, filename):
         with open(os.path.join(self.svg_folder, filename), 'wb') as svg_image:
             svg_image.write(content)
+
+    def create_font(self, font_name, font_family):
+        font_template = FontTemplate(font_name=font_name, font_family=font_family, font_style="regular",
+                                     font_weight="400")
+
+        glyph_list = []
+
+        for svg_image in os.listdir(self.svg_folder):
+            unicode_name = svg_image.split('.')[0]
+            paths = get_paths(svg_image)
+
+            max_width = max(list(map(lambda x: get_max_width(x), paths)))
+
+            glyph = glyph_creator(glyph_name=unicode_name, unicode=unicode_name, data=paths, horizontal_space=max_width)
+
+            glyph_list.append(glyph)
+
+        font_template.create_font(glyph_list)
+
+        with open(os.path.join(self.user_folder, 'font.svg'), 'wb') as svg_file:
+            svg_file.write(font_template.get_font().encode('utf-8'))

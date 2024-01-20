@@ -7,7 +7,7 @@ class FontTemplate:
         self.svg_header = f'''<svg xmlns='http://www.w3.org/2000/svg'><defs>
                             <font id="{self.font_name}" horiz-adv-x="0">'''
         self.svg_footer = '''</font></defs></svg>'''
-        self.font_header = f'''<font-face   font-family="{self.font_family}"
+        self.font_header = f'''<font-face font-family="{self.font_family}"
                                             font-weight="{self.font_weight}"
                                             font-style="{self.font_style}"
                                             font-stretch="normal"
@@ -28,7 +28,7 @@ class FontTemplate:
         self.font = self.svg_header + self.font_header
 
         for glyph in glyphs:
-            self.font += glyph + "\n\t\t\t\t\t\t\t\t\t\t\t"
+            self.font += glyph
 
         self.font += self.svg_footer
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-from manual_config.font_config import FontConfig
+from manual_config.font_handler import FontConfig
 
 font = Blueprint('font', __name__)
 
@@ -19,3 +19,13 @@ def manual_generate():
 @font.route('/status', methods=['GET'])
 def get_status():
     return jsonify(font_config.status)
+
+
+@font.route('/create_font', methods=['POST'])
+def create_font():
+    data = request.json
+    font_name = data['font_name']
+    font_family = data['font_family']
+    font_weight = data['font_weight']
+
+    font_config.create_font(font_name, font_family)
