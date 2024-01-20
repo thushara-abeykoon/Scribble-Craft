@@ -20,15 +20,15 @@ class FontTemplate:
                                             bbox="-3014 -939 9165 1783"
                                             underline-thickness="150"
                                             underline-position="-292"
-                                            slope="-12"
-                                            unicode-range="U+001D-FB04" />'''
+                                            unicode-range="U+001D-FB04" />
+                                            '''
         self.font = None
 
     def create_font(self, glyphs: list):
         self.font = self.svg_header + self.font_header
 
         for glyph in glyphs:
-            self.font += glyph
+            self.font += glyph + "\n\t\t\t\t\t\t\t\t\t\t\t"
 
         self.font += self.svg_footer
 
