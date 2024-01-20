@@ -15,3 +15,16 @@ def get_max_width(path):
     _, max_width, _, _ = max(box for box in bounding_boxes)
 
     return max_width
+
+
+def get_paths(svg_path):
+    paths, attributes = svgpathtools.svg2paths(svg_path)
+
+    paths_data = []
+    for path in paths:
+        paths_data.append(path.d())
+
+    return paths_data
+
+
+
