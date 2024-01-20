@@ -168,7 +168,7 @@ class FontConfig:
             font_url = json_res['data']['output']['url']
             font_file = requests.get(font_url)
 
-            with open(os.path.join(self.user_folder, 'font.ttf'), 'wb') as ttf_file:
+            with open(os.path.join(self.user_folder, f'{font_name}.ttf'), 'wb') as ttf_file:
                 ttf_file.write(font_file.content)
 
             self.status.update({"status": "font making completed"})
