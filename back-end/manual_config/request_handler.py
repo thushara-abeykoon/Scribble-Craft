@@ -26,6 +26,5 @@ def create_font():
     data = request.json
     font_name = data['font_name']
     font_family = data['font_family']
-    font_weight = data['font_weight']
 
     font_config.create_font(font_name, font_family)

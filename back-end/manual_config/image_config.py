@@ -29,7 +29,7 @@ def request_svg(image_path):
     return json.loads(res.text)
 
 
-def get_image(convert_id):
+def get_status(convert_id):
     url_response = requests.get(convertio_url + f"/{convert_id}/status")
     return url_response
 

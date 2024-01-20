@@ -9,7 +9,7 @@ from flask import jsonify
 
 from font_config.font_template import FontTemplate
 from font_config.glyph_manager import get_paths, glyph_creator, get_max_width
-from manual_config.image_config import request_svg, get_image, enhance_image, remove_background
+from manual_config.image_config import request_svg, get_status, enhance_image, remove_background
 
 
 class FontConfig:
@@ -92,7 +92,7 @@ class FontConfig:
                 self.image_status.update({image_name.split('.')[0]: "convert_error"})
 
             while True and convert_id is not None:
-                res = get_image(convert_id)
+                res = get_status(convert_id)
                 json_res = json.loads(res.text)
 
                 if json_res['code'] == 200:
@@ -118,6 +118,7 @@ class FontConfig:
             svg_image.write(content)
 
     def create_font(self, font_name, font_family):
+        global json_res
         font_template = FontTemplate(font_name=font_name, font_family=font_family, font_style="regular",
                                      font_weight="400")
 
@@ -136,4 +137,38 @@ class FontConfig:
         font_template.create_font(glyph_list)
 
         with open(os.path.join(self.user_folder, 'font.svg'), 'wb') as svg_file:
-            svg_file.write(font_template.get_font().encode('utf-8'))
+            svg_file.write(font_template.get_svg_font().encode('utf-8'))
+
+        self.status.update({"status": "svg font making finished"})
+
+        response = font_template.request_ttf()
+
+        if response['code'] == 200:
+            convert_id = response['data']['id']
+            self.status.update({"status": "svg font to ttf conversion started"})
+        else:
+            convert_id = None
+            self.status.update({"status": "svg font to ttf conversion failed"})
+
+        while True and convert_id is not None:
+            res = get_status(convert_id)
+            json_res = json.loads(res.text)
+
+            if json_res['code'] == 200:
+                convert_status = json_res['data']['step']
+                print(convert_status)
+                if convert_status != 'convert':
+                    self.status.update({"status": "converting svg to ttf"})
+                    break
+            else:
+                print("Error")
+                raise HTTPException(json_res['code'])
+
+        if json_res is not None:
+            font_url = json_res['data']['output']['url']
+            font_file = requests.get(font_url)
+
+            with open(os.path.join(self.user_folder, 'font.ttf'), 'wb') as ttf_file:
+                ttf_file.write(font_file.content)
+
+            self.status.update({"status": "font making completed"})
