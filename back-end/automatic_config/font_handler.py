@@ -60,6 +60,8 @@ class AutomaticFontConfig(FontConfig):
     def save_img(label_dir, img_arr):
         count = 1
         for img in img_arr:
-            cv2.imwrite(os.path.join(label_dir, f'{str(count)}.jpg'), img)
+            save_path = os.path.join(label_dir, f'{str(count)}.jpg')
+            cv2.imwrite(save_path, img)
+            print(f"Saved to {save_path}")
             count += 1
 

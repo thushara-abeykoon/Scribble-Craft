@@ -52,7 +52,7 @@ class ModelConfig:
             pred = np.argmax(pred)
             label = self.labels[pred]
             if label in self.predicted:
-                self.predicted.update({label: self.predicted[label]+[thresh]})
+                self.predicted.update({label: self.predicted[label]+[roi]})
             else:
                 self.predicted.update({label: [roi]})
         return self.predicted
