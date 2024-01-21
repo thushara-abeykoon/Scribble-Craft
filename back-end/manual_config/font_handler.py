@@ -35,6 +35,7 @@ class FontConfig:
         self.directory_maker("users")
 
         self.user_folder = self.directory_maker(os.path.join("users", self.current_user_email))
+        self.user_folder = self.directory_maker(os.path.join(self.user_folder, 'manual'))
         self.uploads_folder = self.directory_maker(os.path.join(self.user_folder, 'uploads'))
         self.svg_folder = self.directory_maker(os.path.join(self.user_folder, 'svg_images'))
 
