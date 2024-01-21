@@ -29,7 +29,7 @@ class ModelConfig:
 
         return contours, bounding_boxes
 
-    def get_letters(self):
+    def get_predictions(self):
         y, h, x, w = None, None, None, None
         gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
         ret, thresh1 = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
@@ -54,6 +54,6 @@ class ModelConfig:
             if label in self.predicted:
                 self.predicted.update({label: self.predicted[label]+[thresh]})
             else:
-                self.predicted.update({label: [thresh]})
+                self.predicted.update({label: [roi]})
         return self.predicted
 

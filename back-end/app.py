@@ -9,7 +9,7 @@ import secrets
 app = Flask(__name__)
 app.register_blueprint(user, url_prefix='/user')
 app.register_blueprint(manual, url_prefix='/manual')
-app.register_blueprint(automatic, url_prefix='/automatic')
+app.register_blueprint(automatic, url_prefix='/auto')
 
 secret_key = secrets.token_urlsafe(32)
 
