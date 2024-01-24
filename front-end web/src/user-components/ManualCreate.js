@@ -18,18 +18,14 @@ export default function ManualCreate() {
 
   const characters = Array.from({ length: 10 }, (_, i) =>
     String.fromCharCode(48 + i)
-  )
-    .concat(Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)))
-    .concat(Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i)));
+  ).concat(Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)));
 
   return (
     <div className="w-full flex flex-col items-center mx-10">
-      <AlertBox
-        message={"Accepted Image Types are JPEG, PNG, TIFF, SVG and BMP"}
-      />
+      <AlertBox message={"Accepted Image Types are JPEG and PNG only"} />
       <AlertBox
         message={
-          "If you're uploading a folder with character images, please ensure that each image is appropriately named, such as A.jpg, b.png, and so forth."
+          "If you're uploading a folder with character images, please ensure that each image is appropriately named, such as A.jpg, B.png, and so forth."
         }
       />
       <div
@@ -100,7 +96,7 @@ function CharacterUploadBox({ character, characterImage }) {
 
 function imageFileChecker(fileName) {
   const fileExtension = getFileExtension(fileName);
-  const regex = new RegExp(/^(jpg|jpeg|png|bmp|svg|tiff)$/i);
+  const regex = new RegExp(/^(jpg|jpeg|png)$/i);
 
   if (fileExtension == null) {
     return false;
