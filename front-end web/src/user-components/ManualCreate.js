@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
 import AlertBox from "../other-components/AlertBox";
+import Proceed from "./Proceed";
 
 export default function ManualCreate() {
   const [characterFiles, setCharacterFiles] = useState([]);
@@ -10,15 +11,20 @@ export default function ManualCreate() {
     onDrop: (acceptedFiles) => {
       setCharacterFiles(
         acceptedFiles.filter((file) => {
-          return imageFileChecker(file.name);
+          return (
+            imageFileChecker(file.name) &&
+            characters.find(
+              (char) => char === getFileNameWithoutExtension(file.name)
+            )
+          );
         })
       );
     },
   });
 
-  const characters = Array.from({ length: 10 }, (_, i) =>
-    String.fromCharCode(48 + i)
-  ).concat(Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i)));
+  const characters = Array.from({ length: 26 }, (_, i) =>
+    String.fromCharCode(65 + i)
+  );
 
   return (
     <div className="w-full flex flex-col items-center mx-10">
@@ -36,6 +42,11 @@ export default function ManualCreate() {
         <input {...getInputProps()} />
         <p>Click Or Drop to Upload the Image Folder Here....</p>
       </div>
+      {characters.length == characterFiles.length ? (
+        <Proceed characterFiles={characterFiles} />
+      ) : (
+        <></>
+      )}
       <div className="grid grid-cols-4 w-full gap-10 mb-10">
         {characters.map((chr) => (
           <CharacterUploadBox
@@ -109,6 +120,6 @@ function getFileExtension(filename) {
   return filename.substring(filename.lastIndexOf(".") + 1, filename.length);
 }
 
-function getFileNameWithoutExtension(fileName) {
+export function getFileNameWithoutExtension(fileName) {
   return fileName.substring(0, fileName.lastIndexOf("."));
 }
