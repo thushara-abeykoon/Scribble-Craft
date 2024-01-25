@@ -34,7 +34,7 @@ const AICreate = () => {
             <button
               onClick={() => {
                 setLoading(true);
-                fetchImages(doc, setCharacterImages, setLoading);
+                fetchImages(doc, setLoading, navigate);
               }}
               className="font-mono text-2xl text-white rounded-2xl bg-orange-600 h-16 w-52 mb-10 flex justify-around items-center hover:bg-teal-700 transition-all duration-200"
             >
@@ -53,9 +53,8 @@ const AICreate = () => {
   );
 };
 
-const fetchImages = async (image, setLoading) => {
-  const navigate = useNavigate();
-  url = "";
+const fetchImages = async (image, setLoading, navigate) => {
+  const url = "";
   const formdata = new FormData();
   formdata.append(image);
   axios
