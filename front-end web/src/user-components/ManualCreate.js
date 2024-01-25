@@ -5,7 +5,7 @@ import { FiUpload } from "react-icons/fi";
 import AlertBox from "../other-components/AlertBox";
 import Proceed from "./Proceed";
 
-export default function ManualCreate() {
+export default function ManualCreate({ setCreate }) {
   const [characterFiles, setCharacterFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles) => {
@@ -43,7 +43,7 @@ export default function ManualCreate() {
         <p>Click Or Drop to Upload the Image Folder Here....</p>
       </div>
       {characters.length == characterFiles.length ? (
-        <Proceed characterFiles={characterFiles} />
+        <Proceed characterFiles={characterFiles} setCreate={setCreate} />
       ) : (
         <></>
       )}

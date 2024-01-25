@@ -24,14 +24,22 @@ export default function Home() {
         </p>
       </div>
       <div className="grid grid-cols-2 gap-40 mx-10 w-full h-screen">
-        <HomeCard image={RobotImage} title={"Using AI (BETA)"} />
-        <HomeCard image={HumanImage} title={"Manually!"} />
+        <HomeCard
+          image={RobotImage}
+          title={"Using AI (BETA)"}
+          navigation={"/aicreate"}
+        />
+        <HomeCard
+          image={HumanImage}
+          title={"Manually!"}
+          navigation={"/create"}
+        />
       </div>
     </div>
   );
 }
 
-function HomeCard({ image, title }) {
+function HomeCard({ image, title, navigation }) {
   const navigate = useNavigate();
   return (
     <div className="shadow-stone-800 shadow-2xl w-full h-4/5 bg-teal-700 flex flex-col justify-between items-center text-stone-100 rounded-3xl">
@@ -45,7 +53,7 @@ function HomeCard({ image, title }) {
         </p>
         <button
           onClick={() => {
-            navigate("/create");
+            navigate(navigation);
           }}
           className="shadow-2xl bg-orange-700 hover:bg-black py-4 px-8 transition-colors duration-300 rounded-xl text-xl font-normal"
         >

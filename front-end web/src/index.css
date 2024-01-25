@@ -293,3 +293,7 @@ code {
   overflow: hidden;
 }
 
+.handwrittenFont{
+  font-family: 'Alex_Handwriting';
+  font-size: 30px;
+}

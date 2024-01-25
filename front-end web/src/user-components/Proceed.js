@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 
-const Proceed = ({ characterFiles }) => {
+const Proceed = ({ characterFiles, setCreate }) => {
   const [loading, setLoading] = useState(false);
 
   const jwtToken =
@@ -18,6 +18,7 @@ const Proceed = ({ characterFiles }) => {
   });
 
   const postImages = () => {
+    setCreate(false);
     setLoading(true);
     axios
       .post(uploadUrl, formData, {
@@ -28,10 +29,11 @@ const Proceed = ({ characterFiles }) => {
       })
       .then((res) => {
         console.log(res);
+        if (res.status === 200) setCreate(true);
         setLoading(false);
       })
       .catch((err) => {
-        alert(err);
+        alert("Connection Error");
         setLoading(false);
       });
   };
@@ -47,7 +49,7 @@ const Proceed = ({ characterFiles }) => {
         ) : (
           <>
             PROCESS
-            <FaArrowRight className="text-xl" />
+            <FaArrowRight className="text-2xl" />
           </>
         )}
       </button>
