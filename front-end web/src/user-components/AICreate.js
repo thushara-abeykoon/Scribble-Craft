@@ -1,10 +1,14 @@
+import { data } from "autoprefixer";
+import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaArrowRight } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
+import { Form, useNavigate } from "react-router-dom";
 
 const AICreate = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [doc, setDoc] = useState();
   const { getRootProps, getInputProps } = useDropzone({
@@ -30,6 +34,7 @@ const AICreate = () => {
             <button
               onClick={() => {
                 setLoading(true);
+                fetchImages(doc, setCharacterImages, setLoading);
               }}
               className="font-mono text-2xl text-white rounded-2xl bg-orange-600 h-16 w-52 mb-10 flex justify-around items-center hover:bg-teal-700 transition-all duration-200"
             >
@@ -46,6 +51,23 @@ const AICreate = () => {
       )}
     </div>
   );
+};
+
+const fetchImages = async (image, setLoading) => {
+  const navigate = useNavigate();
+  url = "";
+  const formdata = new FormData();
+  formdata.append(image);
+  axios
+    .post(url, data)
+    .then((res) => {
+      console.log(res);
+      if (res.status === 200) navigate("/chooseImages");
+    })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      setLoading(false);
+    });
 };
 
 export default AICreate;

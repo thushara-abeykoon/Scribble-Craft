@@ -6,8 +6,9 @@ import Downloads from "./components/Downloads";
 import { Route, Routes } from "react-router-dom";
 import Home from "./user-components/Home";
 import Account from "./user-components/Account";
-import Create from "./user-components/FontCreator";
+import FontCreatorManual from "./user-components/FontCreatorManual";
 import backgroundVideo from "./videos/background.mp4";
+import CharacterChoose from "./user-components/CharacterChoose";
 import AICreate from "./user-components/AICreate";
 
 export default function AppUser() {
@@ -30,11 +31,12 @@ export default function AppUser() {
         >
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
+            <Route path="/create" element={<FontCreatorManual />} />
             <Route path="/aicreate" element={<AICreate />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/chooseImages" element={<CharacterChoose />} />
             {/* <Route path="/logout" element={<Register />} /> */}
           </Routes>
         </div>

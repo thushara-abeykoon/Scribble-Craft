@@ -3,7 +3,7 @@ import AICreate from "./AICreate";
 import ManualCreate from "./ManualCreate";
 import CreateFont from "./FontDetailsAdder";
 
-export default function Create() {
+export default function FontCreatorManual() {
   const [create, setCreate] = useState(true);
 
   return (
