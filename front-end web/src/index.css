@@ -297,3 +297,11 @@ code {
   font-family: 'Alex_Handwriting';
   font-size: 30px;
 }
+
+.noScrollBar{
+  scrollbar-width: none;
+}
+
+.noScrollBar::-webkit-scrollbar{
+  display: none;
+}

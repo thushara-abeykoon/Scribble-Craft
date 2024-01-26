@@ -34,7 +34,7 @@ const AICreate = () => {
             <button
               onClick={() => {
                 setLoading(true);
-                fetchImages(doc, setLoading, navigate);
+                fetchImages(doc[0], setLoading, navigate);
               }}
               className="font-mono text-2xl text-white rounded-2xl bg-orange-600 h-16 w-52 mb-10 flex justify-around items-center hover:bg-teal-700 transition-all duration-200"
             >
@@ -54,11 +54,16 @@ const AICreate = () => {
 };
 
 const fetchImages = async (image, setLoading, navigate) => {
-  const url = "";
+  const url = "http://localhost:5000/auto/upload_file";
+  console.log(image);
   const formdata = new FormData();
-  formdata.append(image);
+  formdata.append("file", image);
   axios
-    .post(url, data)
+    .post(url, formdata, {
+      headers: {
+        "Content-Type": `multipart/form-data`,
+      },
+    })
     .then((res) => {
       console.log(res);
       if (res.status === 200) navigate("/chooseImages");
