@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 export default function NavigationBar() {
   return (
     <div className="w-1/2 flex justify-end">
-      <Link to="downloads" className="navBarItem">
-        downloads
+      <Link to="" className="navBarItem">
+        home
       </Link>
       <Link to="about" className="navBarItem">
         about

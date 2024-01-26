@@ -20,28 +20,28 @@ const AICreate = () => {
     <div className="flex flex-col justify-around items-center w-full px-10">
       <div
         {...getRootProps()}
-        className="cursor-pointer h-40 hover:bg-opacity-100 transition-opacity duration-500 bg-orange-700 bg-opacity-80 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-3xl font-mono"
+        className="cursor-pointer h-40 hover:bg-opacity-40 transition-all duration-300 bg-white bg-opacity-30 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-xl font-mono"
       >
         <FiUpload className="text-5xl" />
         <input {...getInputProps()} />
         <p>Drop the document image here....</p>
       </div>
       {doc ? (
-        <div className="font-mono flex flex-col items-center justify-center gap-10 text-xl rounded-lg bg-opacity-70 text-white bg-orange-500 py-10 px-10">
+        <div className="font-mono backdrop-blur-sm flex flex-col items-center justify-center gap-10 text-xl rounded-lg bg-opacity-40 text-white bg-white py-10 mb-5 px-10">
           <p>DOCUMENT PREVIEW</p>
           <img src={URL.createObjectURL(doc[0])} className="w-screen" />
-          <div>
+          <div className="fixed bottom-0">
             <button
               onClick={() => {
                 setLoading(true);
                 fetchImages(doc[0], setLoading, navigate);
               }}
-              className="font-mono text-2xl text-white rounded-2xl bg-orange-600 h-16 w-52 mb-10 flex justify-around items-center hover:bg-teal-700 transition-all duration-200"
+              className="font-mono text-xl text-white rounded-2xl bg-blue-900 h-14 w-52 mb-5 flex justify-around items-center hover:bg-blue-700 transition-all duration-500"
             >
               {loading ? (
                 <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
               ) : (
-                "PROCESS"
+                "Process"
               )}
             </button>
           </div>

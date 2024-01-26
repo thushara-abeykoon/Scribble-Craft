@@ -32,9 +32,9 @@ export default function Home() {
             }
           />
         </div>
-        <div className="flex justify-center items-center z-30 w-full h-24 transition-all">
+        <div className=" mt-5 flex justify-center items-center z-30 w-full h-24 transition-all">
           <buttton
-            className="hover:bg-teal-700 transition-colors duration-500 rounded-md flex justify-around items-center w-44 px-5 cursor-pointer py-3 text-white bg-orange-700"
+            className=" cursor-pointer font-mono text-xl text-white rounded-2xl bg-blue-900 h-14 w-64 mb-5 flex justify-center items-center hover:bg-blue-700 transition-all duration-500"
             onClick={() => {
               navigate("/register");
             }}

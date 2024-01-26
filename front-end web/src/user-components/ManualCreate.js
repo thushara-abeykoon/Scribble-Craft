@@ -36,7 +36,7 @@ export default function ManualCreate({ setCreate }) {
       />
       <div
         {...getRootProps()}
-        className="cursor-pointer h-40 hover:bg-opacity-100 transition-all duration-200 bg-orange-700 bg-opacity-80 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-xl font-mono"
+        className="cursor-pointer h-40 hover:bg-opacity-50 transition-all duration-200 bg-white bg-opacity-40 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-xl font-mono"
       >
         <FiUpload className="text-5xl" />
         <input {...getInputProps()} />
@@ -82,23 +82,23 @@ export function CharacterUploadBox({ character, characterImage }) {
   return (
     <div
       {...getRootProps()}
-      className="backdrop-blur-sm w-full cursor-pointer hover:bg-teal-700 transition-colors duration-200 h-64 flex justify-around items-center font-mono  rounded-xl hover:text-white text-5xl text-teal-700 flex-col"
+      className="backdrop-blur-sm w-full cursor-pointer hover:bg-white-500 transition-colors duration-200 h-64 flex justify-around items-center font-mono  rounded-xl hover:bg-white hover:bg-opacity-60 text-5xl text-white flex-col"
     >
       {file[0] !== undefined ? (
         <img
           src={URL.createObjectURL(file[0])}
-          className="w-full h-3/4 border-4 border-teal-700 rounded-t-xl"
+          className="w-full h-3/4 border-4 opacity-60 border-white-700 rounded-t-xl"
         />
       ) : (
         <>
           <input {...getInputProps()} />
-          <div className=" px-5 border-dashed border-t-4 border-x-4 border-teal-700 rounded-t-xl h-3/4 flex flex-col justify-center gap-6 items-center w-full text-center text-lg">
+          <div className=" px-5 py-3 border-dashed border-t-4 border-x-4 border-white border-opacity-40 rounded-t-xl h-3/4 flex flex-col justify-center gap-6 items-center w-full text-center text-lg">
             <FiUpload className="text-5xl" />
             <p>Click or Drop Here to Upload Image</p>
           </div>
         </>
       )}
-      <div className="h-1/4 rounded-b-xl text-3xl flex justify-center items-center w-full bg-teal-700 text-white">
+      <div className="h-1/4 rounded-b-xl text-3xl flex justify-center items-center w-full bg-white bg-opacity-40 text-white">
         {character}
       </div>
     </div>

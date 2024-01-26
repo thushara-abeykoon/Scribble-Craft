@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 export function Login() {
   return (
-    <div className="box">
+    <div className="box font-mono">
       <p className="boxHeader">Login</p>
       <form>
         <input type="email" placeholder="Email" className="inputField" />
         <input type="password" placeholder="Password" className="inputField" />
         <input type="submit" value="Login" className="button" />
-        <p className="text-xs text-stone-500 mt-8 hover:underline hover:underline-offset-2 cursor-pointer">
+        <p className="text-xs text-stone-200 mt-8 hover:underline hover:underline-offset-2 cursor-pointer">
           Forgot Password?
         </p>
       </form>
@@ -19,7 +19,7 @@ export function Login() {
 export function Register() {
   return (
     <div
-      className="box"
+      className="box font-mono"
       style={{
         paddingTop: "50px",
         height: "450px",

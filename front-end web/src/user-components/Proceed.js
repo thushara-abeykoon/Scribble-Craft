@@ -41,10 +41,10 @@ const Proceed = ({ characterFiles, setCreate }) => {
   };
 
   return (
-    <div>
+    <div className="fixed bottom-0 z-50">
       <button
         onClick={postImages}
-        className="font-mono text-xl text-white rounded-2xl bg-orange-700 h-14 w-40 mb-10 flex justify-around items-center hover:bg-teal-700 transition-all duration-200"
+        className="font-mono text-xl text-white rounded-2xl bg-blue-900 h-14 w-52 mb-5 flex justify-around items-center hover:bg-blue-700 transition-all duration-500"
       >
         {loading ? (
           <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
