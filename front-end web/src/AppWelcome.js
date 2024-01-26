@@ -9,7 +9,7 @@ import About from "./components/About";
 function AppWelcome() {
   return (
     <>
-      <video
+      {/* <video
         muted
         autoplay={"autoplay"}
         preload="auto"
@@ -17,7 +17,7 @@ function AppWelcome() {
         className="fixed min-h-full min-w-full -z-10"
       >
         <source src={backgroundVideo} type="video/mp4" />
-      </video>
+      </video> */}
       <div className="w-full h-full flex flex-col items-center">
         <Header />
         <div

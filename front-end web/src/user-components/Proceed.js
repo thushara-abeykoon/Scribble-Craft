@@ -29,8 +29,10 @@ const Proceed = ({ characterFiles, setCreate }) => {
       })
       .then((res) => {
         console.log(res);
-        if (res.status === 200) setCreate(true);
-        setLoading(false);
+        if (res.status === 200) {
+          setLoading(false);
+          setCreate(true);
+        }
       })
       .catch((err) => {
         alert("Connection Error");
@@ -42,15 +44,12 @@ const Proceed = ({ characterFiles, setCreate }) => {
     <div>
       <button
         onClick={postImages}
-        className="font-mono text-2xl text-white rounded-2xl bg-orange-700 h-20 w-40 mb-10 flex justify-around items-center hover:bg-teal-700 hover:w-52 transition-all duration-200"
+        className="font-mono text-xl text-white rounded-2xl bg-orange-700 h-14 w-40 mb-10 flex justify-around items-center hover:bg-teal-700 transition-all duration-200"
       >
         {loading ? (
           <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
         ) : (
-          <>
-            PROCESS
-            <FaArrowRight className="text-2xl" />
-          </>
+          <>Process</>
         )}
       </button>
       <div></div>

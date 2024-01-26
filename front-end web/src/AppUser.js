@@ -13,15 +13,14 @@ import FontCreatorAuto from "./user-components/FontCreatorAuto";
 export default function AppUser() {
   return (
     <>
-      <video
+      {/* <video
         muted
         autoPlay={"autoplay"}
         preload="auto"
         loop
         className="fixed min-h-full min-w-full -z-10"
-      >
-        <source src={backgroundVideo} type="video/mp4" />
-      </video>
+      > <source src={backgroundVideo} type="video/mp4" />
+      </video> */}
       <div>
         <HeaderUser />
         <div

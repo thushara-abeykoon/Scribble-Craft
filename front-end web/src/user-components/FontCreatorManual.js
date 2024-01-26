@@ -4,14 +4,14 @@ import ManualCreate from "./ManualCreate";
 import CreateFont from "./FontDetailsAdder";
 
 export default function FontCreatorManual() {
-  const [create, setCreate] = useState(true);
+  const [createFont, setCreateFont] = useState(false);
 
   return (
     <div>
-      {create ? (
-        <ManualCreate setCreate={setCreate} />
+      {!createFont ? (
+        <ManualCreate setCreate={setCreateFont} />
       ) : (
-        <CreateFont setCreate={setCreate} />
+        <CreateFont setCreate={setCreateFont} />
       )}
     </div>
   );

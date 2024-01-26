@@ -40,7 +40,7 @@ export default function ManualCreate({ setCreate }) {
       >
         <FiUpload className="text-5xl" />
         <input {...getInputProps()} />
-        <p>Click Or Drop to Upload the Image Folder Here....</p>
+        <p>Drop the Image Folder Here....</p>
       </div>
       {characters.length == characterFiles.length ? (
         <Proceed characterFiles={characterFiles} setCreate={setCreate} />

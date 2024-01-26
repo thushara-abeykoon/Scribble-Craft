@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import GetStatus from "./GetStatus";
 
 const CreateFont = ({ setCreate }) => {
+  const [isStatusOk, setIsStatusOK] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-
   if (isSuccess) {
     return <Success setCreate={setCreate} />;
-  } else {
+  } else if (isStatusOk) {
     return (
       <div className="box">
         <h2 className="boxHeader">Font Details</h2>
@@ -29,6 +30,8 @@ const CreateFont = ({ setCreate }) => {
         </form>
       </div>
     );
+  } else {
+    return <GetStatus setIsStatusOK={setIsStatusOK} />;
   }
 };
 
