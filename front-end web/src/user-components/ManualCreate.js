@@ -27,7 +27,7 @@ export default function ManualCreate({ setCreate }) {
   );
 
   return (
-    <div className="w-full flex flex-col items-center mx-10">
+    <div className="w-full px-10 flex flex-col items-center">
       <AlertBox message={"Accepted Image Types are JPEG and PNG only"} />
       <AlertBox
         message={
@@ -36,9 +36,9 @@ export default function ManualCreate({ setCreate }) {
       />
       <div
         {...getRootProps()}
-        className="cursor-pointer h-96 hover:bg-opacity-100 transition-opacity duration-500 bg-orange-700 bg-opacity-80 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-3xl font-mono"
+        className="cursor-pointer h-40 hover:bg-opacity-100 transition-all duration-200 bg-orange-700 bg-opacity-80 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-xl font-mono"
       >
-        <FiUpload className="text-8xl" />
+        <FiUpload className="text-5xl" />
         <input {...getInputProps()} />
         <p>Click Or Drop to Upload the Image Folder Here....</p>
       </div>
@@ -47,7 +47,7 @@ export default function ManualCreate({ setCreate }) {
       ) : (
         <></>
       )}
-      <div className="grid grid-cols-4 w-full gap-10 mb-10">
+      <div className="grid grid-cols-6 justify-around items-start w-full p-10 gap-10">
         {characters.map((chr) => (
           <CharacterUploadBox
             key={chr}
@@ -62,7 +62,7 @@ export default function ManualCreate({ setCreate }) {
   );
 }
 
-function CharacterUploadBox({ character, characterImage }) {
+export function CharacterUploadBox({ character, characterImage }) {
   const [file, setFile] = useState([]);
 
   useEffect(() => {
@@ -82,7 +82,7 @@ function CharacterUploadBox({ character, characterImage }) {
   return (
     <div
       {...getRootProps()}
-      className="backdrop-blur-sm w-full cursor-pointer hover:bg-teal-700 transition-colors duration-200 h-96 flex justify-between items-center font-mono  rounded-xl hover:text-white text-5xl text-teal-700 flex-col"
+      className="backdrop-blur-sm w-full cursor-pointer hover:bg-teal-700 transition-colors duration-200 h-64 flex justify-around items-center font-mono  rounded-xl hover:text-white text-5xl text-teal-700 flex-col"
     >
       {file[0] !== undefined ? (
         <img
@@ -92,20 +92,20 @@ function CharacterUploadBox({ character, characterImage }) {
       ) : (
         <>
           <input {...getInputProps()} />
-          <div className=" px-5 border-dashed border-t-4 border-x-4 border-teal-700 rounded-t-xl h-3/4 flex flex-col justify-center gap-6 items-center w-full text-center text-2xl">
+          <div className=" px-5 border-dashed border-t-4 border-x-4 border-teal-700 rounded-t-xl h-3/4 flex flex-col justify-center gap-6 items-center w-full text-center text-lg">
             <FiUpload className="text-5xl" />
             <p>Click or Drop Here to Upload Image</p>
           </div>
         </>
       )}
-      <div className="h-1/4 rounded-b-xl flex justify-center items-center w-full bg-teal-700 text-white">
+      <div className="h-1/4 rounded-b-xl text-3xl flex justify-center items-center w-full bg-teal-700 text-white">
         {character}
       </div>
     </div>
   );
 }
 
-function imageFileChecker(fileName) {
+export function imageFileChecker(fileName) {
   const fileExtension = getFileExtension(fileName);
   const regex = new RegExp(/^(jpg|jpeg|png)$/i);
 

@@ -1,15 +1,14 @@
 import React from "react";
 import { HeaderUser } from "./components/Header";
 import Dashboard from "./user-components/Dashboard";
-import About from "./components/About";
 import Downloads from "./components/Downloads";
 import { Route, Routes } from "react-router-dom";
 import Home from "./user-components/Home";
 import Account from "./user-components/Account";
 import FontCreatorManual from "./user-components/FontCreatorManual";
 import backgroundVideo from "./videos/background.mp4";
-import CharacterChoose from "./user-components/CharacterChoose";
 import AICreate from "./user-components/AICreate";
+import FontCreatorAuto from "./user-components/FontCreatorAuto";
 
 export default function AppUser() {
   return (
@@ -36,7 +35,7 @@ export default function AppUser() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/account" element={<Account />} />
-            <Route path="/chooseImages" element={<CharacterChoose />} />
+            <Route path="/chooseImages" element={<FontCreatorAuto />} />
             {/* <Route path="/logout" element={<Register />} /> */}
           </Routes>
         </div>

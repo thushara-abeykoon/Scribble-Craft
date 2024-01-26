@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const CreateFont = () => {
+const CreateFont = ({ setCreate }) => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   if (isSuccess) {
-    return <Success />;
+    return <Success setCreate={setCreate} />;
   } else {
     return (
       <div className="box">
@@ -32,7 +32,7 @@ const CreateFont = () => {
   }
 };
 
-const Success = () => {
+const Success = ({ setCreate }) => {
   const navigate = useNavigate();
   return (
     <div className="w-screen h-screen backdrop-blur-md fixed top-0 left-0 flex justify-center items-center">
@@ -42,7 +42,10 @@ const Success = () => {
           <FaCheckCircle />
         </div>
         <button
-          onClick={() => navigate("/dashboard")}
+          onClick={() => {
+            navigate("/dashboard");
+            setCreate(false);
+          }}
           className="bg-green-600 text-white w-24 p-2 rounded-xl text-sm hover:bg-green-800 transition-all duration-200"
         >
           OK

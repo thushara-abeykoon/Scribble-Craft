@@ -6,7 +6,7 @@ import { FiUpload } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { imageFileChecker } from "./ManualCreate";
 
-const CharacterChoose = () => {
+const CharacterChoose = ({ setCreate }) => {
   const characters = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(65 + i)
   );
@@ -33,6 +33,30 @@ const CharacterChoose = () => {
     });
   }, []);
 
+  const generateFont = async (selectedCharacterFiles) => {
+    const apiUrl = "";
+    const jwtToken = "";
+    const formData = new FormData();
+
+    selectedCharacterFiles.forEach((obj) => {
+      formData.append(obj.name, obj.data);
+    });
+
+    await axios
+      .post(apiUrl, formData, {
+        headers: {
+          "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          setCreate(true);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
+
   console.log(selectedCharacterFiles);
 
   return (
@@ -46,29 +70,42 @@ const CharacterChoose = () => {
               data={characterFile.data}
             />
           ))}
+          {characterFiles.length === selectedCharacterFiles.length &&
+          characterFiles.length !== 0 ? (
+            <NextButton setGenerateButtonClicked={setGenerateButtonClicked} />
+          ) : (
+            <></>
+          )}
         </div>
       ) : (
-        <div className="grid grid-cols-6 justify-around items-start w-full p-10 gap-10">
-          {characters.map((character) => (
-            <CharacterUploadBox
-              setSelectedCharacterFiles={setSelectedCharacterFiles}
-              character={character}
-              characterImage={
-                selectedCharacterFiles
-                  .filter((obj) => obj.name === character)
-                  .map((el) => el.data)[0]
-              }
-            />
-          ))}
+        <div>
+          <div className="grid grid-cols-6 justify-around items-start w-full p-10 gap-10">
+            {characters.map((character) => (
+              <CharacterUploadBox
+                setSelectedCharacterFiles={setSelectedCharacterFiles}
+                character={character}
+                characterImage={
+                  selectedCharacterFiles
+                    .filter((obj) => obj.name === character)
+                    .map((el) => el.data)[0]
+                }
+              />
+            ))}
+          </div>
+          {selectedCharacterFiles.length === 26 ? (
+            <div className="flex justify-center items-center py-5 backdrop-blur-sm fixed bottom-0 left-0 w-full">
+              <button
+                onClick={generateFont}
+                className="bg-teal-700 w-40 h-14 text-white text-xl font-mono rounded-md hover:bg-orange-600 transition-all duration-200"
+              >
+                Generate
+              </button>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       )}
-
-      <GenerateFontButton setGenerateButtonClicked={setGenerateButtonClicked} />
-      {/* {characterFiles.length === selectedCharacterFiles.length && characterFiles.length !== 0 ? (
-        <GenerateFontButton />
-      ) : (
-        <></>
-      )} */}
     </div>
   );
 };
@@ -121,7 +158,7 @@ const CharacterCard = ({ index, data, selectedStatus, handleSelection }) => {
   );
 };
 
-const GenerateFontButton = ({ setGenerateButtonClicked }) => {
+const NextButton = ({ setGenerateButtonClicked }) => {
   const url = "";
 
   return (
@@ -132,7 +169,7 @@ const GenerateFontButton = ({ setGenerateButtonClicked }) => {
         }}
         className="w-40 h-14 flex justify-center items-center bg-orange-600 text-white font-mono text-xl rounded-xl hover:bg-teal-700 transition-all duration-200"
       >
-        Generate
+        Next
       </button>
     </div>
   );

@@ -23,11 +23,11 @@ export default function NavigationBar() {
 export function NavBarUser() {
   return (
     <div className="w-1/2 flex justify-end">
+      <Link to="" className="navBarItem">
+        home
+      </Link>
       <Link to="dashboard" className="navBarItem">
         dashboard
-      </Link>
-      <Link to="downloads" className="navBarItem">
-        downloads
       </Link>
       <Link to="account" className="navBarItem">
         account

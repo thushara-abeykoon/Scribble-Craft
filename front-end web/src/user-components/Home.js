@@ -7,22 +7,6 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
   return (
     <div className="flex flex-col justify-around items-center mx-10">
-      <div className="w-full text-right text-4xl font-bold bg-gray-200 px-20 py-5 mb-20 font-mono text-gray-700 rounded-2xl flex justify-between items-center shadow-xl">
-        {/* <p className="text-4xl font-thin ">Welcome! User</p> */}
-        <p className="text-2xl font-thin text-red-800">
-          Your account isn't activated yet!{" "}
-          <span className="hover:underline underline-offset-4 cursor-pointer">
-            click here
-          </span>{" "}
-          to activate!
-        </p>
-        {/* <p className="text-2xl font-thin text-green-800">
-          Your account seems to be activated!
-        </p> */}
-        <p className="hover:text-red-600 cursor-pointer">
-          <IoIosCloseCircle />
-        </p>
-      </div>
       <div className="grid grid-cols-2 gap-40 mx-10 w-full h-screen">
         <HomeCard
           image={RobotImage}
