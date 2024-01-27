@@ -84,7 +84,7 @@ class FontConfig:
         self.status.update({"status": "converting images into svg"})
         json_res = None
         for image_name in os.listdir(self.rembg_folder):
-            image_response = request_svg(os.path.join(self.rembg_folder, image_name))
+            image_response = request_svg(os.path.join(self.rembg_folder, image_name),0)
             print(image_response)
 
             if image_response['code'] == 200:
@@ -144,7 +144,7 @@ class FontConfig:
 
         self.status.update({"status": "svg font making finished"})
 
-        response = font_template.request_ttf()
+        response = font_template.request_ttf(0)
 
         if response['code'] == 200:
             convert_id = response['data']['id']

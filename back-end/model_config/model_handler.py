@@ -13,7 +13,7 @@ class ModelConfig:
 
     @staticmethod
     def get_labels():
-        with open("model_config/labels.txt", 'r') as label_file:
+        with open("model_config/api_keys.txt", 'r') as label_file:
             return label_file.read().splitlines()
 
     @staticmethod

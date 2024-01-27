@@ -4,8 +4,14 @@ import cv2
 import rembg
 import requests
 
+
+def get_from_txt():
+    with open("manual_config/api_keys.txt", 'r') as label_file:
+        return label_file.read().splitlines()
+
+
+api_key = get_from_txt()
 convertio_url = "https://api.convertio.co/convert"
-api_key = "b6ae0aa5e8839fcd471b71b1ce655c44"
 
 
 def enhance_image(image):
@@ -16,9 +22,9 @@ def enhance_image(image):
     return threshold_image
 
 
-def request_svg(image_path):
+def request_svg(image_path, api_index):
     payload_for_id = {
-        "apikey": api_key,
+        "apikey": api_key[api_index],
         "input": "base64",
         "file": convert_image_to_base64_string(image_path),
         "filename": "apple-icon.png",
@@ -26,6 +32,10 @@ def request_svg(image_path):
     }
 
     res = requests.post(convertio_url, json=payload_for_id)
+    if res.status_code != 200:
+        api_index += 1
+        if api_index < len(api_key):
+            return request_svg(image_path, api_index)
     return json.loads(res.text)
 
 

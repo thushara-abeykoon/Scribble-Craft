@@ -28,9 +28,9 @@ class FontTemplate:
     def get_svg_font(self):
         return self.font
 
-    def request_ttf(self):
+    def request_ttf(self, api_index):
         payload_for_font = {
-            "apikey": api_key,
+            "apikey": api_key[api_index],
             "input": "base64",
             "file": base64.b64encode(self.font.encode('utf-8')).decode('utf-8'),
             "filename": "font.svg",
@@ -38,6 +38,9 @@ class FontTemplate:
         }
 
         res = requests.post(convertio_url, json=payload_for_font)
+        if res.status_code != 200:
+            api_index += 1
+            return self.request_ttf(api_index)
         return json.loads(res.text)
 
     @staticmethod
