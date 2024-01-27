@@ -33,9 +33,8 @@ def request_svg(image_path, api_index):
 
     res = requests.post(convertio_url, json=payload_for_id)
     if res.status_code != 200:
-        api_index += 1
-        if api_index < len(api_key):
-            return request_svg(image_path, api_index)
+        api_index = api_index + 1 if (api_index < len(api_key)) else 0
+        return request_svg(image_path, api_index)
     return json.loads(res.text)
 
 
