@@ -1,7 +1,10 @@
+import base64
+import io
 import os
 import threading
 
 import cv2
+from PIL import Image
 from flask import jsonify
 
 from manual_config.font_handler import FontConfig
@@ -64,4 +67,14 @@ class AutomaticFontConfig(FontConfig):
             cv2.imwrite(save_path, img)
             print(f"Saved to {save_path}")
             count += 1
+
+    def get_images(self, character_name):
+        image_array = []
+        for image in self.predictions[character_name]:
+            pil_image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+            buffered = io.BytesIO()
+            pil_image.save(buffered, format="PNG")
+            image_array.append(base64.b64encode(buffered.getvalue()).decode('ascii'))
+
+        return image_array
 

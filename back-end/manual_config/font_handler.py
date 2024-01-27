@@ -16,7 +16,7 @@ class FontConfig:
 
     def __init__(self):
         self.convert_thread = None
-        self.available_files = list(map(lambda x: chr(x), range(65, 67)))
+        self.available_files = list(map(lambda x: chr(x), range(65, 91)))
         self.current_user_email = None
         self.files_list: list = []
         self.user_folder = None
@@ -119,7 +119,7 @@ class FontConfig:
             svg_image.write(content)
 
     def create_font(self, font_name, font_family):
-        global json_res
+        json_res = None
         font_template = FontTemplate(font_name=font_name, font_family=font_family, font_style="regular",
                                      font_weight="400")
 
@@ -127,7 +127,7 @@ class FontConfig:
 
         for svg_image in os.listdir(self.svg_folder):
             unicode_name = svg_image.split('.')[0]
-            paths = get_paths(svg_image)
+            paths = get_paths(os.path.join(self.svg_folder, svg_image))
 
             max_width = max(list(map(lambda x: get_max_width(x), paths)))
 

@@ -11,9 +11,9 @@ font_config = FontConfig()
 
 
 @manual.route('/generate', methods=['POST'])
-@jwt_required()
+# @jwt_required()
 def manual_generate():
-    status = font_config.get_upload(current_user_email=get_jwt_identity(), files_list=request.files)
+    status = font_config.get_upload(current_user_email="thushara", files_list=request.files)
     print(font_config.image_status)
     return status
 
@@ -30,3 +30,5 @@ def create_font():
     font_family = data['font_family']
 
     font_config.create_font(font_name, font_family)
+
+    return jsonify({"status": "font making completed"})
