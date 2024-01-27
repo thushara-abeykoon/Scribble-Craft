@@ -305,3 +305,8 @@ code {
 .noScrollBar::-webkit-scrollbar{
   display: none;
 }
+
+.handwritingFont{
+  font-family: '.handwritingFont';
+  font-size: 30px;
+}
