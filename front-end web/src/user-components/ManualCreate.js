@@ -36,7 +36,7 @@ export default function ManualCreate({ setCreate }) {
       />
       <div
         {...getRootProps()}
-        className="cursor-pointer h-40 hover:bg-opacity-50 transition-all duration-200 bg-white bg-opacity-40 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-xl font-mono"
+        className="cursor-pointer h-40 hover:bg-opacity-30 transition-all duration-200 bg-white bg-opacity-20 backdrop-blur-md text-white px-10 py-5 flex flex-col justify-around items-center w-full mb-10 rounded-xl text-xl font-mono"
       >
         <FiUpload className="text-5xl" />
         <input {...getInputProps()} />
@@ -82,7 +82,7 @@ export function CharacterUploadBox({ character, characterImage }) {
   return (
     <div
       {...getRootProps()}
-      className="backdrop-blur-sm w-full cursor-pointer hover:bg-white-500 transition-colors duration-200 h-64 flex justify-around items-center font-mono  rounded-xl hover:bg-white hover:bg-opacity-60 text-5xl text-white flex-col"
+      className="backdrop-blur-sm w-full cursor-pointer transition-colors duration-200 h-64 flex justify-around items-center font-mono  rounded-xl hover:bg-white hover:bg-opacity-10 text-5xl text-white flex-col"
     >
       {file[0] !== undefined ? (
         <img

@@ -28,8 +28,8 @@ const GetStatus = ({ setIsStatusOK }) => {
   }, [jsonStatus]);
 
   return (
-    <div className="fixed left-0 bottom-0 w-screen h-screen backdrop-blur-sm flex justify-center items-center">
-      <div className=" gap-5 rounded-md flex flex-col justify-center items-center w-96 h-40 bg-stone-300 font-mono text-xl">
+    <div className="fixed left-0 bottom-0 w-screen h-screen backdrop-blur-md flex justify-center items-center">
+      <div className=" gap-5 rounded-lg flex flex-col justify-center items-center w-96 h-40 bg-white bg-opacity-20 text-white font-mono text-xl">
         <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
         <p className="text-lg text-center">{jsonStatus}</p>
       </div>

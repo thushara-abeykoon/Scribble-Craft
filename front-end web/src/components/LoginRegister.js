@@ -17,6 +17,8 @@ export function Login() {
 }
 
 export function Register() {
+  const handleSubmit = (event) => {};
+
   return (
     <div
       className="box font-mono"
