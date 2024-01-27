@@ -5,7 +5,7 @@ from http.client import HTTPException
 
 import cv2
 import requests
-from flask import jsonify
+from flask import jsonify, send_file
 
 from font_config.font_template import FontTemplate
 from font_config.glyph_manager import get_paths, glyph_creator, get_max_width
@@ -26,6 +26,7 @@ class FontConfig:
         self.convert_error = False
         self.image_status: dict = {}
         self.status = {"status": "uploading images"}
+        self.font_name = None
 
     def get_upload(self, current_user_email, files_list):
 
@@ -119,6 +120,7 @@ class FontConfig:
             svg_image.write(content)
 
     def create_font(self, font_name, font_family):
+        self.font_name = font_name
         json_res = None
         font_template = FontTemplate(font_name=font_name, font_family=font_family, font_style="regular",
                                      font_weight="400")
@@ -169,7 +171,12 @@ class FontConfig:
             font_url = json_res['data']['output']['url']
             font_file = requests.get(font_url)
 
-            with open(os.path.join(self.user_folder, f'{font_name}.ttf'), 'wb') as ttf_file:
+            with open(os.path.join(self.user_folder, f'{self.font_name}.ttf'), 'wb') as ttf_file:
                 ttf_file.write(font_file.content)
 
             self.status.update({"status": "font making completed"})
+
+    def get_font(self):
+        if self.font_name is None:
+            return {"error": "font is not created yet"}, 402
+        return send_file(path_or_file=f"{self.user_folder}/{self.font_name}.ttf"), 200
