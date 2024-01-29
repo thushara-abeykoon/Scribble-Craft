@@ -130,12 +130,12 @@ class FontConfig:
         for svg_image in os.listdir(self.svg_folder):
             unicode_name = svg_image.split('.')[0]
             paths = get_paths(os.path.join(self.svg_folder, svg_image))
+            if paths:
+                max_width = max(list(map(lambda x: get_max_width(x), paths)))
 
-            max_width = max(list(map(lambda x: get_max_width(x), paths)))
+                glyph = glyph_creator(glyph_name=unicode_name, unicode=unicode_name, data=paths, horizontal_space=max_width)
 
-            glyph = glyph_creator(glyph_name=unicode_name, unicode=unicode_name, data=paths, horizontal_space=max_width)
-
-            glyph_list.append(glyph)
+                glyph_list.append(glyph)
 
         font_template.create_font(glyph_list)
 

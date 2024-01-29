@@ -22,10 +22,5 @@ app.config['JWT_SECRET_KEY'] = secret_key
 jwt = JWTManager(app)
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
 if __name__ == '__main__':
     app.run()
