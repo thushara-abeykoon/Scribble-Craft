@@ -4,7 +4,6 @@ import Dashboard from "./user-components/Dashboard";
 import Downloads from "./components/Downloads";
 import { Route, Routes } from "react-router-dom";
 import Home from "./user-components/Home";
-import Account from "./user-components/Account";
 import FontCreatorManual from "./user-components/FontCreatorManual";
 import backgroundVideo from "./videos/background.mp4";
 import AICreate from "./user-components/AICreate";
@@ -12,6 +11,7 @@ import FontCreatorAuto from "./user-components/FontCreatorAuto";
 import axios from "axios";
 import { saveAs } from "file-saver";
 import CustomFont from "./fonts/akaDora.ttf";
+import CreateFont from "./user-components/FontDetailsAdder";
 
 export default function AppUser() {
   return (
@@ -36,7 +36,6 @@ export default function AppUser() {
             <Route path="/aicreate" element={<AICreate />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/downloads" element={<Downloads />} />
-            <Route path="/account" element={<Account />} />
             <Route path="/chooseImages" element={<FontCreatorAuto />} />
             {/* <Route path="/logout" element={<Register />} /> */}
           </Routes>

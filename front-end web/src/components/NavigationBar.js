@@ -29,9 +29,6 @@ export function NavBarUser() {
       <Link to="dashboard" className="navBarItem">
         dashboard
       </Link>
-      <Link to="account" className="navBarItem">
-        account
-      </Link>
       <Link to="/" className="navBarItem">
         logout
       </Link>

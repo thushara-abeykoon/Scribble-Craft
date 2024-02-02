@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import AlertBox from "../other-components/AlertBox";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
-import { saveAs } from "file-saver";
 import CustomFont from "../fonts/akaDora.ttf";
 
 export default function Dashboard() {
@@ -55,8 +54,8 @@ export default function Dashboard() {
         ></textarea>
         <textarea
           value={typedText}
-          style={{ fontFamily: "MyHandwriting" }}
-          className="noScrollBar handwrittenFont bg-opacity-40 backdrop-blur-md resize-none text-lg p-5 outline-none h-96 w-full bg-white rounded-2xl"
+          style={{ fontFamily: "MyHandwriting", fontSize: "100px" }}
+          className="noScrollBar  handwrittenFont bg-opacity-40 backdrop-blur-md resize-none text-8xl p-5 outline-none h-96 w-full bg-white rounded-2xl"
           readOnly="true"
         ></textarea>
       </div>
@@ -69,7 +68,7 @@ export default function Dashboard() {
         {loading ? (
           <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
         ) : (
-          "Generate Image"
+          "Download Font"
         )}
       </button>
     </div>

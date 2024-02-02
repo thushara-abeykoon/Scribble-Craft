@@ -5,12 +5,14 @@ import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { imageFileChecker } from "./ManualCreate";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CharacterChoose = ({ setCreate }) => {
   const characters = Array.from({ length: 26 }, (_, i) =>
     String.fromCharCode(65 + i)
   );
 
+  const [loading, setLoading] = useState(false);
   const [generateButtonClicked, setGenerateButtonClicked] = useState(false);
   const [characterFiles, setCharacterFiles] = useState([]);
   const [selectedCharacterFiles, setSelectedCharacterFiles] = useState([]);
@@ -34,12 +36,13 @@ const CharacterChoose = ({ setCreate }) => {
   }, []);
 
   const generateFont = async (selectedCharacterFiles) => {
-    const apiUrl = "";
+    setLoading(true);
+    const apiUrl = "http://localhost:5000/manual/generate";
     const jwtToken = "";
     const formData = new FormData();
-
+    console.log(selectedCharacterFiles);
     selectedCharacterFiles.forEach((obj) => {
-      formData.append(obj.name, obj.data);
+      formData.append(obj.name, obj.data, obj.name);
     });
 
     await axios
@@ -54,7 +57,8 @@ const CharacterChoose = ({ setCreate }) => {
           setCreate(true);
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => alert(err.data))
+      .finally(() => setLoading(false));
   };
 
   console.log(selectedCharacterFiles);
@@ -95,10 +99,14 @@ const CharacterChoose = ({ setCreate }) => {
           {selectedCharacterFiles.length === 26 ? (
             <div className="flex justify-center items-center py-5 backdrop-blur-sm fixed bottom-0 left-0 w-full">
               <button
-                onClick={generateFont}
+                onClick={() => generateFont(selectedCharacterFiles)}
                 className="bg-teal-700 w-40 h-14 text-white text-xl font-mono rounded-md hover:bg-orange-600 transition-all duration-200"
               >
-                Generate
+                {loading ? (
+                  <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
+                ) : (
+                  <>Process</>
+                )}
               </button>
             </div>
           ) : (
