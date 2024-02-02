@@ -137,7 +137,7 @@ code {
   transition: background-color 0.5s;
 }
 .button:hover{
-  background: rgb(15 118 110);
+  background: #090671;
 }
 
 .navBarItem{
