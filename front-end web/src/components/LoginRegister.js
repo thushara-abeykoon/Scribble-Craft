@@ -17,7 +17,7 @@ export function Login() {
         <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" className="inputField" />
         <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" className="inputField" />
         <input type="submit" value="Login" className="button" />
-        <p className="text-xs text-stone-200 mt-8 hover:underline hover:underline-offset-2 cursor-pointer">
+        <p className="text-xs text-stone-200 mt-8 hover:underline hover:underline-offset-8 cursor-pointer">
           Forgot Password?
         </p>
       </form>

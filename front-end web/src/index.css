@@ -119,9 +119,14 @@ code {
   font-size: small;
 }
 
-.inputField:focus{
-  color: rgb(79, 205, 255);
-  border-color:rgb(79, 205, 255) ;
+/* .inputField:focus{
+  color: #AA16DE;
+  border-color:#AA16DE ;
+} */
+
+::-ms-reveal{
+    filter: invert(100%);
+    padding-left: 10px;
 }
 
 .button{
