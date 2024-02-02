@@ -9,7 +9,6 @@ import backgroundVideo from "./videos/background.mp4";
 import AICreate from "./user-components/AICreate";
 import FontCreatorAuto from "./user-components/FontCreatorAuto";
 import axios from "axios";
-import { saveAs } from "file-saver";
 import CustomFont from "./fonts/akaDora.ttf";
 import CreateFont from "./user-components/FontDetailsAdder";
 

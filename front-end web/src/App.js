@@ -6,7 +6,7 @@ import AppWelcome from "./AppWelcome";
 export default function App() {
   return (
     <BrowserRouter>
-      <AppUser />
+      <AppWelcome />
     </BrowserRouter>
   );
 }

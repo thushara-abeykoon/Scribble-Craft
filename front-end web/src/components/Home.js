@@ -8,7 +8,7 @@ export default function Home() {
   const navigate = useNavigate();
   return (
     <>
-      <div className="flex flex-col items-center fixed bottom-0 justify-around ">
+      <div className="flex flex-col items-center justify-around h-[78.5vh] ">
         <div className=" px-20 grid grid-cols-3 grid-rows-1 gap-5">
           <QuotesCard
             fontClass={"akadora"}
@@ -33,7 +33,7 @@ export default function Home() {
           />
         </div>
         <div className=" mt-5 flex justify-center items-center z-30 w-full h-24 transition-all">
-          <buttton
+          {/* <buttton
             className=" cursor-pointer font-mono text-xl text-white rounded-2xl bg-blue-900 h-14 w-64 mb-5 flex justify-center items-center hover:bg-blue-700 transition-all duration-500"
             onClick={() => {
               navigate("/register");
@@ -42,7 +42,7 @@ export default function Home() {
             <span className="font-semibold text-stone-300">Get Started</span>
             <TbMinusVertical className="text-3xl text-stone-300" />
             <FaArrowRight className="text-md text-stone-300" />
-          </buttton>
+          </buttton> */}
         </div>
       </div>
     </>

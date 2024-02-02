@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
   return (
-    <div className="w-1/2 flex justify-end">
+    <div className="w-1/2 flex justify-end font-mono">
       <Link to="" className="navBarItem">
         home
       </Link>
