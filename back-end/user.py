@@ -17,11 +17,11 @@ def parameters_check(data, required_fields):
 @user.route('/register', methods=['POST'])
 def register():
     data = request.json
-    required_fields = ['username', 'fullname', 'email', 'password']
+    required_fields = ['name', 'email', 'password']
     if not parameters_check(data, required_fields):
         return jsonify({"error": "missing parameters"})
 
-    insert_statement = "INSERT INTO user (username,fullname,email,password) VALUES (%s,%s,%s,MD5(%s));"
+    insert_statement = "INSERT INTO user (name,email,password) VALUES (%s,%s,MD5(%s));"
     conn = get_connection()
     cursor = conn.cursor()
 
