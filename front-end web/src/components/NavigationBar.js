@@ -29,7 +29,10 @@ export function NavBarUser() {
       <Link to="dashboard" className="navBarItem">
         dashboard
       </Link>
-      <Link to="/" className="navBarItem">
+      <Link onClick={()=>{
+        localStorage.removeItem("token")
+        window.location.reload();
+        }} to="/" className="navBarItem">
         logout
       </Link>
     </div>
