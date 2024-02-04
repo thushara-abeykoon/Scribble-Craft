@@ -38,7 +38,7 @@ const CharacterChoose = ({ setCreate }) => {
   const generateFont = async (selectedCharacterFiles) => {
     setLoading(true);
     const apiUrl = "http://localhost:5000/manual/generate";
-    const jwtToken = "";
+    const jwtToken = `Bearer ${localStorage.getItem("token")}` 
     const formData = new FormData();
     console.log(selectedCharacterFiles);
     selectedCharacterFiles.forEach((obj) => {

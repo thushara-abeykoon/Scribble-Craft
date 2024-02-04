@@ -7,8 +7,6 @@ import axios from "axios";
 const Proceed = ({ characterFiles, setCreate }) => {
   const [loading, setLoading] = useState(false);
 
-  const jwtToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwNjEyMDM0MiwianRpIjoiYWFkYmUyYzItOTc1NC00NmY2LWEzMDItM2IxZDRmYTQ2NmI4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InRodXNoYXJhZEBnYWRhZC5jb20iLCJuYmYiOjE3MDYxMjAzNDIsImV4cCI6MTcwNjEyMTI0Mn0.6e5-4CHgofR2kUf6LthhGT6aL33nU9V8Aq5F--qEoB8";
   const uploadUrl = "http://localhost:5000/manual/generate";
 
   const formData = new FormData();
@@ -24,7 +22,7 @@ const Proceed = ({ characterFiles, setCreate }) => {
       .post(uploadUrl, formData, {
         headers: {
           "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
-          Authorization: `Bearer ${jwtToken}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       })
       .then((res) => {

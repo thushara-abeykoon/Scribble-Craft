@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NavigationBar() {
   return (
@@ -21,6 +21,7 @@ export default function NavigationBar() {
 }
 
 export function NavBarUser() {
+  const navigate = useNavigate();
   return (
     <div className="w-1/2 flex justify-end">
       <Link to="" className="navBarItem">
@@ -31,7 +32,8 @@ export function NavBarUser() {
       </Link>
       <Link onClick={()=>{
         localStorage.removeItem("token")
-        window.location.reload();
+        navigate("/")
+        window.location.href = "http://localhost:3000";
         }} to="/" className="navBarItem">
         logout
       </Link>

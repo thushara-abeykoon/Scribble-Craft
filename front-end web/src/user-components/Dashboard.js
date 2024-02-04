@@ -22,7 +22,9 @@ export default function Dashboard() {
   useEffect(() => {
     const getFont = async () => {
       await axios
-        .get("http://localhost:5000/manual/request-font")
+        .get("http://localhost:5000/manual/request-font",{headers:{
+          Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }})
         .then((res) => {
           if (res.status === 200) {
             setFontCreatedStatus(true);

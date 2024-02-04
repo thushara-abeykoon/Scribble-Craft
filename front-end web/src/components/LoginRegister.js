@@ -13,9 +13,7 @@ export function Login() {
       await axios.post("http://localhost:5000/user/login",{email, password}).then(res=> {
       if(res.status === 200){
         localStorage.setItem("token",res.data['access_token'])
-        
-        navigate('/')
-        window.location.reload();
+        window.location.href = "http://localhost:3000";
 
       }
     }).catch(err=>console.log(err));
