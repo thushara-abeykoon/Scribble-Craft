@@ -24,7 +24,7 @@ const CharacterChoose = ({ setCreate }) => {
         .then((res) => {
           if (res.status === 200) {
             setCharacterFiles((prevState) => [
-              ...prevState,
+              ...prevState,   
               { name: character, data: res.data },
             ]);
           }
