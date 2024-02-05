@@ -28,17 +28,25 @@ class FontConfig:
         self.status = {"status": "uploading images"}
         self.font_name = None
 
-    def get_upload(self, current_user_email, files_list):
 
-        self.current_user_email = current_user_email
-        self.files_list = files_list
-
+    def create_necessary_dirs(self):
         self.directory_maker("users")
-
         self.user_folder = self.directory_maker(os.path.join("users", self.current_user_email))
         self.user_folder = self.directory_maker(os.path.join(self.user_folder, 'manual'))
         self.uploads_folder = self.directory_maker(os.path.join(self.user_folder, 'uploads'))
         self.svg_folder = self.directory_maker(os.path.join(self.user_folder, 'svg_images'))
+
+    def get_upload(self,current_user_email, file_array:dict):
+        self.current_user_email = current_user_email
+
+    def get_upload(self, current_user_email, files_list:list):
+
+        self.current_user_email = current_user_email
+        self.files_list = files_list
+
+        self.create_necessary_dirs()
+
+
 
         if not self.is_all_files_available():
             return jsonify({'error': 'Missing images'}), 400
@@ -49,8 +57,7 @@ class FontConfig:
             self.image_status.update({save_name.split('.')[0]: 'converting'})
             file.save(os.path.join(self.uploads_folder, save_name))
 
-        self.convert_thread = threading.Thread(target=self.convert_images_into_svg)
-        self.convert_thread.start()
+        threading.Thread(target=self.convert_images_into_svg).start()
         return jsonify({'upload_success': True}), 200
 
     def is_all_files_available(self):
