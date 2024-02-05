@@ -15,7 +15,6 @@ from manual_config.image_config import request_svg, get_status, enhance_image, r
 class FontConfig:
 
     def __init__(self):
-        self.convert_thread = None
         self.available_files = list(map(lambda x: chr(x), range(65, 91)))
         self.current_user_email = None
         self.files_list: list = []
