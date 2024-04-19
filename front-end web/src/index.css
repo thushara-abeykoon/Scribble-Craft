@@ -139,6 +139,9 @@ code {
   border: 1px solid transparent;
   border-radius: 10px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.5s;
 }
 .button:hover{
