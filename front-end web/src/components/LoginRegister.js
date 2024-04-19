@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SuccessAlert from "../other-components/SuccessAlert";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import ErrorAlert from "../other-components/ErrorAlert";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [isErrorActive, setIsErrorActive] = useState(false);
 
   const handleLogin = async(e) => { 
       setIsLoading(true);
@@ -21,7 +23,7 @@ export function Login() {
       }
     }).catch(err=>{
       setIsLoading(false);
-      alert("Wrong Email or Password!");
+      setIsErrorActive(true);
     });
    }
 
@@ -36,6 +38,7 @@ export function Login() {
           Forgot Password?
         </p>
       </form>
+      {isErrorActive?<ErrorAlert alertInfo={"Invalid email or password"} setIsActive={setIsErrorActive} />:null}
     </div>
   );
 }
