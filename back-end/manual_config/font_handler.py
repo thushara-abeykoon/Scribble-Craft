@@ -1,3 +1,4 @@
+import base64
 import json
 import os
 import threading
@@ -35,26 +36,26 @@ class FontConfig:
         self.uploads_folder = self.directory_maker(os.path.join(self.user_folder, 'uploads'))
         self.svg_folder = self.directory_maker(os.path.join(self.user_folder, 'svg_images'))
 
-    def get_upload(self,current_user_email, file_array:dict):
-        self.current_user_email = current_user_email
-
-    def get_upload(self, current_user_email, files_list:list):
+    def get_upload(self, current_user_email, files_list, files_type):
 
         self.current_user_email = current_user_email
         self.files_list = files_list
 
         self.create_necessary_dirs()
 
-
-
         if not self.is_all_files_available():
             return jsonify({'error': 'Missing images'}), 400
 
-        for available_file in self.available_files:
-            file = self.files_list[available_file]
-            save_name = f"{available_file}.{file.filename.split('.')[-1]}"
-            self.image_status.update({save_name.split('.')[0]: 'converting'})
-            file.save(os.path.join(self.uploads_folder, save_name))
+        if files_type == "base64":
+            for available_file in self.available_files:
+                with open(f"{self.uploads_folder}/{available_file}.jpg", "wb") as image_file:
+                    image_file.write(base64.b64decode(files_list[available_file]))
+        else:
+            for available_file in self.available_files:
+                file = self.files_list[available_file]
+                save_name = f"{available_file}.{file.filename.split('.')[-1]}"
+                self.image_status.update({save_name.split('.')[0]: 'converting'})
+                file.save(os.path.join(self.uploads_folder, save_name))
 
         threading.Thread(target=self.convert_images_into_svg).start()
         return jsonify({'upload_success': True}), 200

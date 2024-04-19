@@ -1,3 +1,10 @@
+# from manual_config.font_handler import FontConfig
+#
+# font_config = FontConfig()
+#
+# status = font_config.get_upload("thushara",{"A":"a","B":"b"}, "base64")
+#
+# print(status)
 
 
 # from model_config.model_handler import ModelConfig
