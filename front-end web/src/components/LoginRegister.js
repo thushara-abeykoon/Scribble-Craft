@@ -1,22 +1,28 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SuccessAlert from "../other-components/SuccessAlert";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async(e) => { 
+      setIsLoading(true);
       e.preventDefault()
       await axios.post("http://localhost:5000/user/login",{email, password}).then(res=> {
+        setIsLoading(false);
       if(res.status === 200){
         localStorage.setItem("token",res.data['access_token'])
         window.location.href = "http://localhost:3000";
-
       }
-    }).catch(err=>console.log(err));
+    }).catch(err=>{
+      setIsLoading(false);
+      alert("Wrong Email or Password!");
+    });
    }
 
   return (
@@ -25,7 +31,7 @@ export function Login() {
       <form onSubmit={handleLogin}>
         <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" className="inputField" />
         <input type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Password" className="inputField" />
-        <input type="submit" value="Login" className="button" />
+        <button type="submit" className="button">{isLoading?<AiOutlineLoading3Quarters className="text-3xl animate-spin" />:"Login"}</button>
         <p className="text-xs text-stone-200 mt-8 hover:underline hover:underline-offset-8 cursor-pointer">
           Forgot Password?
         </p>
@@ -41,6 +47,11 @@ export function Register() {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
+  const [alertBoxActive, setAlertBoxActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if(!password !== confirmPassword){
@@ -49,9 +60,16 @@ export function Register() {
   };
 
   const registerUser = async () => {
+    setIsLoading(true);
     await axios.post("http://localhost:5000/user/register",{name,email,password})
-    .then(res=>console.log(res.data))
-    .catch(err=>console.error(err))
+    .then(res=>{
+      setIsLoading(false);
+      setAlertBoxActive(true);
+    })
+    .catch(err=>{
+      setIsLoading(false);
+      alert("Error Occured!");
+    })
   }
 
   return (
@@ -75,8 +93,9 @@ export function Register() {
           placeholder="Confirm Password"
           className="inputField"
         />
-        <input type="submit" value="Register" className="button" />
+       <button type="submit" className="button">{isLoading?<AiOutlineLoading3Quarters className="text-3xl animate-spin" />:"Register"}</button>
       </form>
+      {alertBoxActive?<SuccessAlert alertInfo={"Registration Successful"} setIsActive={setAlertBoxActive} buttonFunction={()=>{navigate('/login')}} />:<></>}
     </div>
   );
 }
