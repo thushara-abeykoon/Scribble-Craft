@@ -23,22 +23,31 @@ class AutomaticFontConfig(FontConfig):
         self.predictions = {}
         self.predictions_folder = None
 
-    def get_upload(self, current_user_email, document):
-        self.current_user_email = current_user_email
-        self.document = document
+    def create_necessary_dirs(self):
         self.directory_maker('users')
         self.user_folder = self.directory_maker(os.path.join('users', self.current_user_email))
         self.user_folder = self.directory_maker(os.path.join(self.user_folder, 'automatic'))
         self.predictions_folder = self.directory_maker(os.path.join(self.user_folder, 'predictions'))
+        self.uploads_folder = self.directory_maker(os.path.join(self.user_folder, 'uploads'))
+        self.svg_folder = self.directory_maker(os.path.join(self.user_folder, 'svgs'))
 
+    def get_upload(self, current_user_email, document):
+        # creating directories for users
+        self.current_user_email = current_user_email
+        self.document = document
+
+        self.create_necessary_dirs()
+
+        # validating uploaded image
         if not self.doc_validator():
             return jsonify({"error": "file type cannot be accepted!"}), 422
 
+        # saving uploaded image
         self.document_path = os.path.join(self.user_folder, document.filename)
         document.save(self.document_path)
 
-        self.convert_thread = threading.Thread(target=self.image_predictions())
-        self.convert_thread.start()
+        # starting new thread for image predictions function
+        threading.Thread(target=self.image_predictions()).start()
         return jsonify({"status": "uploaded successfully"}), 200
 
     def doc_validator(self):
@@ -50,6 +59,7 @@ class AutomaticFontConfig(FontConfig):
 
     def image_predictions(self):
         self.status.update({"status": "character prediction started"})
+        # making predictions on uploaded image
         model_config = ModelConfig(self.document_path)
         self.predictions = model_config.get_predictions()
         for label in model_config.labels:
@@ -77,4 +87,29 @@ class AutomaticFontConfig(FontConfig):
             image_array.append(base64.b64encode(buffered.getvalue()).decode('ascii'))
 
         return image_array
+
+    def handle_upload_data(self, character_data):
+        self.current_user_email = "thushara2@gmail.com"
+        self.create_necessary_dirs()
+        # save each character image by its base64 data
+        try:
+            for character in character_data:
+                name = character['name']
+                data = character['data']
+                file_format = data.split(';')[0].split('/')[1]
+                base64_data = data.split(',')[1].encode('utf-8')
+                with open(f'{os.path.join(self.uploads_folder, name)}.{file_format}', 'wb') as file:
+                    file.write(base64.decodebytes(base64_data))
+        except Exception as e:
+            print(e)
+            return jsonify({"error": str(e)}), 500
+
+        threading.Thread(target=self.convert_images_into_svg()).start()
+
+        return jsonify({"status": "uploaded successfully"}), 200
+
+
+
+
+
 
