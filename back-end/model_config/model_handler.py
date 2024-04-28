@@ -2,6 +2,7 @@ import cv2
 import imutils
 import numpy as np
 from keras.models import load_model
+from keras.preprocessing.image import img_to_array
 
 
 class ModelConfig:
@@ -30,30 +31,36 @@ class ModelConfig:
         return contours, bounding_boxes
 
     def get_predictions(self):
-        y, h, x, w = None, None, None, None
-        gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
-        ret, thresh1 = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
-        dilated = cv2.dilate(thresh1, None, iterations=2)
+        for thresh_value in range(30, 130, 10):
+            y, h, x, w = None, None, None, None
+            gray = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+            ret, thresh1 = cv2.threshold(gray, thresh_value, 255, cv2.THRESH_BINARY_INV)
+            dilated = cv2.dilate(thresh1, None, iterations=2)
+            contours = cv2.findContours(dilated.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours = imutils.grab_contours(contours)
+            contours = self.sort_contours(contours, method="top-to-bottom")[0]
+            # loop over the contours
+            for c in contours:
+                if cv2.contourArea(c) > 10:
+                    (x, y, w, h) = cv2.boundingRect(c)
+                roi = gray[y:y + h, x:x + w]
 
-        contours = cv2.findContours(dilated.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        contours = imutils.grab_contours(contours)
-        contours = self.sort_contours(contours, method="top-to-bottom")[0]
-        # loop over the contours
-        for c in contours:
-            if cv2.contourArea(c) > 10:
-                (x, y, w, h) = cv2.boundingRect(c)
-            roi = gray[y:y + h, x:x + w]
-            thresh = cv2.threshold(roi, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
-            thresh = cv2.resize(thresh, (32, 32), interpolation=cv2.INTER_CUBIC)
-            thresh = thresh.astype("float32") / 255.0
-            thresh = np.expand_dims(thresh, axis=-1)
-            thresh = thresh.reshape(1, 32, 32, 1)
-            pred = self.model.predict(thresh)
-            pred = np.argmax(pred)
-            label = self.labels[pred]
-            if label in self.predicted:
-                self.predicted.update({label: self.predicted[label]+[roi]})
-            else:
-                self.predicted.update({label: [roi]})
+                thresh = self.thresh_hold_and_resize_image(roi, 0)
+
+                pred = self.model.predict(thresh)
+                pred = np.argmax(pred)
+                label = self.labels[pred]
+                if label in self.predicted:
+                    self.predicted.update({label: self.predicted[label] + [roi]})
+                else:
+                    self.predicted.update({label: [roi]})
         return self.predicted
+
+    @staticmethod
+    def thresh_hold_and_resize_image(image, thresh_value):
+        thresh = cv2.threshold(image, thresh_value, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+        thresh = cv2.resize(thresh, (32, 32), interpolation=cv2.INTER_CUBIC)
+        thresh = thresh.astype("float32") / 255.0
+        thresh = np.expand_dims(thresh, axis=-1)
+        return thresh.reshape(1, 32, 32, 1)
 
