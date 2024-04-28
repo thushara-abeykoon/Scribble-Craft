@@ -35,19 +35,22 @@ const CharacterChoose = ({ setCreate }) => {
   }, []);
 
   const generateFont = async (selectedCharacterFiles) => {
-    setLoading(true);
-    const apiUrl = "http://localhost:5000/manual/generate";
+    setLoading(true); 
+    const apiUrl = "http://localhost:5000/auto/generate";
     const jwtToken = `Bearer ${localStorage.getItem("token")}` 
-    const formData = new FormData();
-    console.log(selectedCharacterFiles);
-    selectedCharacterFiles.forEach((obj) => {
-      formData.append(obj.name, obj.data, obj.name);
-    });
+    // const formData = new FormData();
+    // console.log(selectedCharacterFiles);
+
+    // formData.append("data",selectedCharacterFiles);
+
+    // selectedCharacterFiles.forEach((obj) => {
+    //   formData.append(obj.name, obj.data);
+    // });
 
     await axios
-      .post(apiUrl, formData, {
+      .post(apiUrl, selectedCharacterFiles, {
         headers: {
-          "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+          // "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
           Authorization: `Bearer ${jwtToken}`,
         },
       })
@@ -56,11 +59,11 @@ const CharacterChoose = ({ setCreate }) => {
           setCreate(true);
         }
       })
-      .catch((err) => alert(err.data))
+      .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   };
 
-  console.log(selectedCharacterFiles);
+  // console.log(selectedCharacterFiles);
 
   return (
     <div>
@@ -146,6 +149,7 @@ const CharacterArrayChard = ({ name, data, setSelectedCharacterFiles }) => {
   );
 };
 
+// character card component used to display predicted character images
 const CharacterCard = ({ index, data, selectedStatus, handleSelection }) => {
   return (
     <div
@@ -165,6 +169,7 @@ const CharacterCard = ({ index, data, selectedStatus, handleSelection }) => {
   );
 };
 
+// after selecting all predicted characters, next button is displayed
 const NextButton = ({ setGenerateButtonClicked }) => {
   const url = "";
 
@@ -182,20 +187,25 @@ const NextButton = ({ setGenerateButtonClicked }) => {
   );
 };
 
+// this component used to upload character images
 const CharacterUploadBox = ({
   setSelectedCharacterFiles,
   character,
   characterImage,
 }) => {
-  console.log(characterImage);
+  // console.log(characterImage);
 
   const onDrop = (acceptedFile) => {
     if (imageFileChecker(acceptedFile[0].name)) {
-      console.log(acceptedFile[0].name);
-      setSelectedCharacterFiles((prevState) => [
-        ...prevState.filter((obj) => obj.name !== character),
-        { name: character, data: URL.createObjectURL(acceptedFile[0]) },
-      ]);
+      // console.log(acceptedFile[0].name);
+
+      convertBlobtoBase64(acceptedFile[0]).then(data=>{
+        setSelectedCharacterFiles((prevState) => [
+          ...prevState.filter((obj) => obj.name !== character),
+          { name: character, data },
+        ]);
+      });
+
     } else alert("Wrong File Type Detected!");
   };
   const { getRootProps, getInputProps } = useDropzone({
@@ -229,3 +239,16 @@ const CharacterUploadBox = ({
 };
 
 export default CharacterChoose;
+
+
+// this function converts blob type image to base64
+const convertBlobtoBase64 = async (blob) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = () => {
+      const base64data = reader.result;
+      resolve(base64data)
+    };
+  });
+}
