@@ -1,10 +1,12 @@
 import base64
 import os
 
+import cv2
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from manual_config.font_handler import FontConfig
+from manual_config.image_config import enhance_image
 
 manual = Blueprint('manual', __name__)
 
@@ -14,7 +16,7 @@ font_config = FontConfig()
 @manual.route('/generate', methods=['POST'])
 @jwt_required()
 def manual_generate():
-    status = font_config.get_upload(current_user_email=get_jwt_identity(), files_list=request.files)
+    status = font_config.get_upload(current_user_email=get_jwt_identity(), files_list=request.files, files_type="other")
     print(font_config.image_status)
     return status
 
@@ -50,6 +52,22 @@ def get_font():
                     return {"font": to_base64(f"{font_folder}/{file}")}
 
     return {"error": "font not created yet"}, 404
+
+
+@manual.route('/threshold-image/<thresh_value>', methods=['GET'])
+def threshold_image(thresh_value):
+    if not os.path.exists("temp"):
+        os.mkdir("temp")
+    image = request.files['image']
+
+    file_save_path = os.path.join("temp", image.filename)
+    image.save(file_save_path)
+    cv2_image = cv2.imread(file_save_path)
+    enhanced_image = enhance_image(cv2_image, int(thresh_value))
+    _, image_array = cv2.imencode('.jpg', enhanced_image)
+    im_bytes = image_array.tobytes()
+    os.remove(file_save_path)
+    return base64.b64encode(im_bytes)
 
 
 def to_base64(file_path):
