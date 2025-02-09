@@ -33,9 +33,10 @@ def register():
 
     try:
         cursor.execute(insert_statement, insert_tuple)
+        conn.commit()
         return jsonify({"message": "success"})
     except mysql.connector.Error as error:
-        return jsonify({"error": f"{error.msg}"})
+        return jsonify({"error": f"{error.msg}"}), 500
 
 
 @user.route('/login', methods=['POST'])

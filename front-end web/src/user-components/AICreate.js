@@ -1,11 +1,9 @@
-import { data } from "autoprefixer";
 import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FaArrowRight } from "react-icons/fa6";
 import { FiUpload } from "react-icons/fi";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AICreate = () => {
   const navigate = useNavigate();
@@ -62,6 +60,8 @@ const fetchImages = async (image, setLoading, navigate) => {
     .post(url, formdata, {
       headers: {
         "Content-Type": `multipart/form-data`,
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Transfer-Encoding": "chunked"
       },
     })
     .then((res) => {

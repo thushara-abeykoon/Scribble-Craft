@@ -2,7 +2,6 @@ import base64
 import json
 import cv2
 from PIL import Image
-import rembg
 import requests
 
 
@@ -15,10 +14,10 @@ api_key = get_from_txt()
 convertio_url = "https://api.convertio.co/convert"
 
 
-def enhance_image(image, thresh_value):
+def enhance_image(image):
     cv2.resize(image, (200, 200))
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    _, threshold_image = cv2.threshold(gray_image, thresh_value, 255, cv2.THRESH_BINARY)
+    _, threshold_image = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
     return threshold_image
 

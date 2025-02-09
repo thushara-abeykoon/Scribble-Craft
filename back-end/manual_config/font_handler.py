@@ -3,6 +3,7 @@ import json
 import os
 import threading
 from http.client import HTTPException
+from traceback import print_tb
 
 import cv2
 import requests
@@ -15,7 +16,7 @@ from manual_config.image_config import request_svg, get_status, enhance_image, r
 
 class FontConfig:
 
-    def __init__(self):
+    def __init__(self, font_type="manual"):
         self.available_files = list(map(lambda x: chr(x), range(65, 91)))
         self.current_user_email = None
         self.files_list: list = []
@@ -27,14 +28,14 @@ class FontConfig:
         self.image_status: dict = {}
         self.status = {"status": "uploading images"}
         self.font_name = None
-
+        self.font_type = font_type
 
     def create_necessary_dirs(self):
         self.directory_maker("users")
         self.user_folder = self.directory_maker(os.path.join("users", self.current_user_email))
-        self.user_folder = self.directory_maker(os.path.join(self.user_folder, 'manual'))
+        self.user_folder = self.directory_maker(os.path.join(self.user_folder, self.font_type))
         self.uploads_folder = self.directory_maker(os.path.join(self.user_folder, 'uploads'))
-        self.svg_folder = self.directory_maker(os.path.join(self.user_folder, 'svg_images'))
+        self.svg_folder = self.directory_maker(os.path.join(self.user_folder, 'svgs'))
 
     def get_upload(self, current_user_email, files_list, files_type):
 
@@ -43,13 +44,18 @@ class FontConfig:
 
         self.create_necessary_dirs()
 
-        if not self.is_all_files_available():
-            return jsonify({'error': 'Missing images'}), 400
-
         if files_type == "base64":
-            for available_file in self.available_files:
-                with open(f"{self.uploads_folder}/{available_file}.jpg", "wb") as image_file:
-                    image_file.write(base64.b64decode(files_list[available_file]))
+            try:
+                for character in files_list:
+                    name = character['name']
+                    data = character['data']
+                    file_format = data.split(';')[0].split('/')[1]
+                    base64_data = data.split(',')[1].encode('utf-8')
+                    with open(f'{os.path.join(self.uploads_folder, name)}.{file_format}', 'wb') as file:
+                        file.write(base64.decodebytes(base64_data))
+            except Exception as e:
+                print(e)
+                return jsonify({"error": str(e)}), 500
         else:
             for available_file in self.available_files:
                 file = self.files_list[available_file]
@@ -66,7 +72,7 @@ class FontConfig:
         for available_char in self.available_files:
             try:
                 self.files_list[available_char]
-            except:
+            except Exception:
                 return False
 
         return True
@@ -79,11 +85,15 @@ class FontConfig:
 
     def enhance_and_rembg(self):
         self.rembg_folder = self.directory_maker(os.path.join(self.user_folder, 'rembg'))
-        for image_name in os.listdir(self.uploads_folder):
-            enhanced_cv2_image = enhance_image(cv2.imread(os.path.join(self.uploads_folder, image_name)))
-            background_removed_image = remove_background(enhanced_cv2_image)
+        for image_name_with_extension in os.listdir(self.uploads_folder):
+            image_path = os.path.join(self.uploads_folder, image_name_with_extension)
+            image_name = image_name_with_extension.split('.')[0]
+            enhanced_cv2_image = enhance_image(cv2.imread(image_path))
 
-            cv2.imwrite(os.path.join(self.rembg_folder, f"{image_name.split('.')[0]}.png"), background_removed_image)
+
+            background_removed_image = remove_background(enhanced_cv2_image)
+            background_removed_image.save(os.path.join(self.rembg_folder, f"{image_name}.png"), 'PNG')
+            # cv2.imwrite(os.path.join(self.rembg_folder, f"{image_name.split('.')[0]}.png"), background_removed_image)
 
     def convert_images_into_svg(self):
         self.status.update({"status": "enhancing and background removing"})
@@ -91,7 +101,7 @@ class FontConfig:
         self.status.update({"status": "converting images into svg"})
         json_res = None
         for image_name in os.listdir(self.rembg_folder):
-            image_response = request_svg(os.path.join(self.rembg_folder, image_name),0)
+            image_response = request_svg(os.path.join(self.rembg_folder, image_name), 0)
             print(image_response)
 
             if image_response['code'] == 200:
@@ -130,7 +140,7 @@ class FontConfig:
         self.font_name = font_name
         json_res = None
         font_template = FontTemplate(font_name=font_name, font_family=font_family, font_style="regular",
-                                     font_weight="400")
+                                     font_weight="600")
 
         glyph_list = []
 
@@ -140,7 +150,8 @@ class FontConfig:
             if paths:
                 max_width = max(list(map(lambda x: get_max_width(x), paths)))
 
-                glyph = glyph_creator(glyph_name=unicode_name, unicode=unicode_name, data=paths, horizontal_space=max_width)
+                glyph = glyph_creator(glyph_name=unicode_name, unicode=unicode_name, data=paths,
+                                      horizontal_space=max_width)
 
                 glyph_list.append(glyph)
 
@@ -184,6 +195,7 @@ class FontConfig:
             self.status.update({"status": "font making completed"})
 
     def get_font(self):
-        if self.font_name is None:
+        font_path = f"{self.user_folder}/{self.font_name}.ttf"
+        if self.font_name is None or os.path.exists(font_path):
             return {"error": "font is not created yet"}, 402
-        return send_file(path_or_file=f"{self.user_folder}/{self.font_name}.ttf"), 200
+        return send_file(path_or_file=font_path), 200

@@ -43,13 +43,14 @@ def get_font():
     user_folder = os.path.join("users", get_jwt_identity())
     if os.path.exists(user_folder):
         print("user folder found")
-        font_folder = os.path.join(user_folder, "manual")
-        if os.path.exists(font_folder):
-            for file in os.listdir(font_folder):
-                print(file)
-                if file.split('.')[-1] == "ttf":
-                    # return send_file(path_or_file=f"{font_folder}/{file}")
-                    return {"font": to_base64(f"{font_folder}/{file}")}
+        font_folder_list = [os.path.join(user_folder, "automatic"), os.path.join(user_folder, "manual")]
+        for font_folder in font_folder_list:
+            if os.path.exists(font_folder):
+                for file in os.listdir(font_folder):
+                    print(file)
+                    if file.split('.')[-1] == "ttf":
+                        # return send_file(path_or_file=f"{font_folder}/{file}")
+                        return {"font": to_base64(f"{font_folder}/{file}")}
 
     return {"error": "font not created yet"}, 404
 
@@ -63,7 +64,7 @@ def threshold_image(thresh_value):
     file_save_path = os.path.join("temp", image.filename)
     image.save(file_save_path)
     cv2_image = cv2.imread(file_save_path)
-    enhanced_image = enhance_image(cv2_image, int(thresh_value))
+    enhanced_image = enhance_image(cv2_image)
     _, image_array = cv2.imencode('.jpg', enhanced_image)
     im_bytes = image_array.tobytes()
     os.remove(file_save_path)

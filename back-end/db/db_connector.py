@@ -3,10 +3,10 @@ import mysql.connector
 
 def get_connection():
     try:
-        return mysql.connector.connect(host="localhost", user="root", passwd="", db="scribble_craft")
-    except mysql.connector.Error:
+        return mysql.connector.connect(host="localhost", user="root", passwd="1234", db="scribble_craft")
+    except:
         try:
-            conn = mysql.connector.connect(host="localhost", user="root", passwd="")
+            conn = mysql.connector.connect(host="localhost", user="root", passwd="1234")
             cur = conn.cursor()
             print("Database isn't created yet!...\nCreating Database")
             cur.execute("CREATE DATABASE scribble_craft")
@@ -20,8 +20,7 @@ def database_initialize():
     cur = conn.cursor()
     cur.execute("""CREATE TABLE IF NOT EXISTS user (
         id INT AUTO_INCREMENT PRIMARY KEY, 
-        username VARCHAR(50) UNIQUE NOT NULL, 
-        fullname VARCHAR(50) NOT NULL, 
+        name VARCHAR(50) UNIQUE NOT NULL, 
         email VARCHAR(100) UNIQUE NOT NULL, 
         password VARCHAR(255) NOT NULL)""")
 

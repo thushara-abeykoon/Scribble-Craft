@@ -48,7 +48,8 @@ class AutomaticFontConfig(FontConfig):
 
         # starting new thread for image predictions function
         threading.Thread(target=self.image_predictions()).start()
-        return jsonify({"status": "uploaded successfully"}), 200
+        self.status = {"status": "uploaded successfully"}
+        return jsonify(self.status), 200
 
     def doc_validator(self):
         allowed_doc_types = ['jpg', 'png']
@@ -89,7 +90,6 @@ class AutomaticFontConfig(FontConfig):
         return image_array
 
     def handle_upload_data(self, character_data):
-        self.current_user_email = "thushara2@gmail.com"
         self.create_necessary_dirs()
         # save each character image by its base64 data
         try:
