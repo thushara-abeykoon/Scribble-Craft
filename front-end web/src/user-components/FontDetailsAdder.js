@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import GetStatus from "./GetStatus";
 import axios from "axios";
 
-const CreateFont = ({ setCreate }) => {
+const CreateFont = ({ setCreate, font_type="manual" }) => {
   const [isStatusOk, setIsStatusOK] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [fontName, setFontName] = useState("");
@@ -12,7 +12,7 @@ const CreateFont = ({ setCreate }) => {
 
   const handleSubmit = async () => {
     await axios
-      .post("http://localhost:5000/manual/create_font", {
+      .post(`http://localhost:5000/${font_type}/create_font`, {
         font_name: fontName,
         font_family: fontFamilyName,
       })
@@ -50,7 +50,7 @@ const CreateFont = ({ setCreate }) => {
       </div>
     );
   } else {
-    return <GetStatus setIsStatusOK={setIsStatusOK} />;
+    return <GetStatus fontType={font_type} setIsStatusOK={setIsStatusOK} />;
   }
 };
 

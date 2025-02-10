@@ -2,7 +2,7 @@ import base64
 import os
 
 import cv2
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, send_file
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from manual_config.font_handler import FontConfig
@@ -40,7 +40,21 @@ def create_font():
 @manual.route('/request-font', methods=['GET'])
 @jwt_required()
 def get_font():
-    user_folder = os.path.join("users", get_jwt_identity())
+    font_file_path = get_font_file_path(get_jwt_identity())
+    if font_file_path is None:
+        return {"error": "font not created yet"}, 404
+    return {"font": to_base64(font_file_path)}
+
+@manual.route('/download_font', methods=['GET'])
+@jwt_required()
+def download_font():
+    font_file_path = get_font_file_path(get_jwt_identity())
+    if font_file_path is None:
+        return {"error": "font not created yet"}, 404
+    return send_file(font_file_path, as_attachment=True)
+
+def get_font_file_path(user_email):
+    user_folder = os.path.join("users", user_email)
     if os.path.exists(user_folder):
         print("user folder found")
         font_folder_list = [os.path.join(user_folder, "automatic"), os.path.join(user_folder, "manual")]
@@ -49,10 +63,11 @@ def get_font():
                 for file in os.listdir(font_folder):
                     print(file)
                     if file.split('.')[-1] == "ttf":
-                        # return send_file(path_or_file=f"{font_folder}/{file}")
-                        return {"font": to_base64(f"{font_folder}/{file}")}
+                        return os.path.join(font_folder, file)
+    else:
+        return None
 
-    return {"error": "font not created yet"}, 404
+
 
 
 @manual.route('/threshold-image/<thresh_value>', methods=['GET'])

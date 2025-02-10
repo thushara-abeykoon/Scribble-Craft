@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const GetStatus = ({ setIsStatusOK }) => {
+const GetStatus = ({ setIsStatusOK, fontType="manual" }) => {
   const [jsonStatus, setJsonStatus] = useState("Loading...");
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/manual/status");
+        const response = await axios.get(`http://localhost:5000/${fontType}/status`);
         const status = response.data.status;
 
         setJsonStatus(status);

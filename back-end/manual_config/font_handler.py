@@ -95,13 +95,14 @@ class FontConfig:
             background_removed_image.save(os.path.join(self.rembg_folder, f"{image_name}.png"), 'PNG')
             # cv2.imwrite(os.path.join(self.rembg_folder, f"{image_name.split('.')[0]}.png"), background_removed_image)
 
+
     def convert_images_into_svg(self):
         self.status.update({"status": "enhancing and background removing"})
         self.enhance_and_rembg()
         self.status.update({"status": "converting images into svg"})
         json_res = None
         for image_name in os.listdir(self.rembg_folder):
-            image_response = request_svg(os.path.join(self.rembg_folder, image_name), 0)
+            image_response =  request_svg(os.path.join(self.rembg_folder, image_name), 0)
             print(image_response)
 
             if image_response['code'] == 200:

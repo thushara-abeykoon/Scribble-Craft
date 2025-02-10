@@ -2,11 +2,12 @@ import svgpathtools
 
 
 def glyph_creator(glyph_name, unicode, data, horizontal_space):
-    if len(data) == 1:
-        return f'<glyph glyph-name="{glyph_name}" unicode="{unicode}" d="{data[0]}" horiz-adv-x="{horizontal_space}" />'
-    else:
-        return f'<glyph glyph-name="{glyph_name}" unicode="{unicode}" horiz-adv-x="{horizontal_space}">' + ''.join(
-            map(lambda x: f'<path d="{x}"/>', data)) + '</glyph>'
+    return f'<glyph glyph-name="{glyph_name}" unicode="{unicode}" d="{"".join(map(str, data))}" horiz-adv-x="{horizontal_space}" />'
+    # if len(data) == 1:
+    #     return f'<glyph glyph-name="{glyph_name}" unicode="{unicode}" d="{data[0]}" horiz-adv-x="{horizontal_space}" />'
+    # else:
+    #     return f'<glyph glyph-name="{glyph_name}" unicode="{unicode}" horiz-adv-x="{horizontal_space}">' + ''.join(
+    #         map(lambda x: f'<path d="{x}"/>', data)) + '</glyph>'
 
 
 def get_max_width(path):

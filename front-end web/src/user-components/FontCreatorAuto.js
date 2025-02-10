@@ -3,14 +3,14 @@ import CharacterChoose from "./CharacterChoose";
 import CreateFont from "./FontDetailsAdder";
 
 const FontCreatorAuto = () => {
-  const [create, setCreate] = useState(true);
+  const [create, setCreate] = useState(false);
 
   return (
     <div>
-      {create ? (
+      {!create ? (
         <CharacterChoose setCreate={setCreate} />
       ) : (
-        <CreateFont setCreate={setCreate} />
+        <CreateFont setCreate={setCreate} font_type="auto" />
       )}
     </div>
   );

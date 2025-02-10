@@ -43,12 +43,14 @@ def get_status():
     return jsonify(font_config_manual.status)
 
 @automatic.route('/create_font', methods=['POST'])
+@jwt_required()
 def create_font():
+    current_user_email = get_jwt_identity()
     data = request.json
     font_name = data['font_name']
     font_family = data['font_family']
 
-    font_config_manual.create_font(font_name, font_family)
+    font_config_manual.create_font(font_name, font_family, current_user_email)
 
     return jsonify({"status": "font making completed"})
 

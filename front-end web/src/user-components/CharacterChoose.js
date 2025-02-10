@@ -51,7 +51,7 @@ const CharacterChoose = ({ setCreate }) => {
       .post(apiUrl, selectedCharacterFiles, {
         headers: {
           // "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
-          Authorization: `Bearer ${jwtToken}`,
+          Authorization: jwtToken,
         },
       })
       .then((res) => {
@@ -102,7 +102,7 @@ const CharacterChoose = ({ setCreate }) => {
             <div className="flex justify-center items-center py-5 backdrop-blur-sm fixed bottom-0 left-0 w-full">
               <button
                 onClick={() => generateFont(selectedCharacterFiles)}
-                className="bg-teal-700 w-40 h-14 text-white text-xl font-mono rounded-md hover:bg-orange-600 transition-all duration-200"
+                className="bg-teal-700 w-40 h-14 text-white text-xl font-mono rounded-md hover:bg-orange-600 transition-all duration-200 flex items-center justify-center"
               >
                 {loading ? (
                   <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
@@ -215,23 +215,23 @@ const CharacterUploadBox = ({
   return (
     <div
       {...getRootProps()}
-      className="backdrop-blur-sm w-full cursor-pointer hover:bg-teal-700 transition-colors duration-200 h-64 flex justify-between items-center font-mono  rounded-xl hover:text-white text-5xl text-teal-700 flex-col"
+      className="backdrop-blur-sm w-full cursor-pointer transition-colors duration-200 h-64 flex justify-around items-center font-mono  rounded-xl hover:bg-white hover:bg-opacity-10 text-5xl text-white flex-col"
     >
       {characterImage ? (
         <img
           src={characterImage}
-          className="w-full h-3/4 border-4 border-teal-700 rounded-t-xl"
+          className="w-full h-3/4 border-4 opacity-60 border-white-700 rounded-t-xl"
         />
       ) : (
         <>
           <input {...getInputProps()} />
-          <div className=" px-5 border-dashed border-t-4 border-x-4 border-teal-700 rounded-t-xl h-3/4 flex flex-col justify-center gap-6 items-center w-full text-center text-lg">
+          <div className=" px-5 py-3 border-dashed border-t-4 border-x-4 border-white border-opacity-40 rounded-t-xl h-3/4 flex flex-col justify-center gap-6 items-center w-full text-center text-lg">
             <FiUpload className="text-5xl" />
             <p>Click or Drop Here to Upload Image</p>
           </div>
         </>
       )}
-      <div className="h-1/4 rounded-b-xl text-3xl flex justify-center items-center w-full bg-teal-700 text-white">
+      <div className="h-1/4 rounded-b-xl text-3xl flex justify-center items-center w-full bg-white bg-opacity-40 text-white">
         {character}
       </div>
     </div>

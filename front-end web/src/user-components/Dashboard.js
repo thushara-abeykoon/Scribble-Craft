@@ -38,6 +38,28 @@ export default function Dashboard() {
     getFont();
   }, []);
 
+  const downloadFont = async() => {
+    try {
+      setLoading(true)
+      const response = await axios.get('http://127.0.0.1:5000/manual/download_font', {responseType:"blob", headers:{
+        Authorization: `Bearer ${localStorage.getItem('token')}` 
+      }});
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'font.ttf'; // Change this to your file name
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+  } catch (error) {
+      console.error('Download error:', error);
+  }
+  finally{
+    setLoading(false)
+  }
+  }
+
   return (
     <div className="flex flex-col justify-around items-center gap-10 w-screen px-10">
       {!fontCreatedStatus ? (
@@ -63,9 +85,7 @@ export default function Dashboard() {
       </div>
       <button
         className="bg-blue-700 mb-10 h-12 w-40 flex items-center justify-center text-white rounded-lg hover:bg-blue-600 transition-all duration-200"
-        onClick={() => {
-          setLoading(true);
-        }}
+        onClick={downloadFont}
       >
         {loading ? (
           <AiOutlineLoading3Quarters className="text-3xl animate-spin" />
